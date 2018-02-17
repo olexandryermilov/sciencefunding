@@ -1,16 +1,33 @@
-package com.yermilov.domain;
+package com.yermilov.sciencefunding.domain;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "scientist")
 public class Scientist {
-    private int id;
+    @DatabaseField(generatedId =true)
+    private Integer id;
+    @DatabaseField
     private int userId;
+    @DatabaseField
     private int domainId;
+    @DatabaseField
     private int organisationId;
 
-    public int getId() {
+    public Scientist() {
+    }
+
+    public Scientist(int userId, int domainId, int organisationId) {
+        this.userId = userId;
+        this.domainId = domainId;
+        this.organisationId = organisationId;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

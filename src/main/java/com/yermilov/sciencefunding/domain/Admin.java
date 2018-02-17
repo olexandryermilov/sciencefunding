@@ -1,15 +1,33 @@
-package com.yermilov.domain;
+package com.yermilov.sciencefunding.domain;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "admin")
+@DatabaseTable(tableName = "admin")
 public class Admin {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@DatabaseField(generatedId =true, columnName = "id")
+    private Long id;
+    @DatabaseField
     private String email;
+    @DatabaseField
     private String password;
 
-    public int getId() {
+    public Admin(){}
+    public Admin(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,7 +61,7 @@ public class Admin {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id.intValue();
         result = 31 * result + email.hashCode();
         result = 31 * result + password.hashCode();
         return result;

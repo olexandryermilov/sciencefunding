@@ -5,11 +5,13 @@ out/
 *.iws
 *.ipr
 
+
 # Gradle #
 build/
 .gradle/
 
 *.class
+*.properties
 jacoco/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

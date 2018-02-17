@@ -1,10 +1,19 @@
-package com.yermilov.domain;
+package com.yermilov.sciencefunding.domain;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName= "user")
 public class User {
+    @DatabaseField(generatedId = true)
     private int id;
+    @DatabaseField
     private String email;
+    @DatabaseField
     private String password;
+    @DatabaseField
     private String name;
+    @DatabaseField
     private String surname;
 
     public int getId() {

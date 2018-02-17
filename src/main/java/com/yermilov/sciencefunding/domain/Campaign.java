@@ -1,12 +1,33 @@
-package com.yermilov.domain;
+package com.yermilov.sciencefunding.domain;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "campaign")
 public class Campaign {
-    private int id;
+    @DatabaseField(generatedId=true)
+    private Integer id;
+    @DatabaseField
     private String organiserId;
+    @DatabaseField
     private int needToRaise;
+    @DatabaseField
     private String name;
+    @DatabaseField
     private int domainId;
+    @DatabaseField
     private String description;
+
+    public Campaign() {
+    }
+
+    public Campaign(String organiserId, int needToRaise, String name, int domainId, String description) {
+        this.organiserId = organiserId;
+        this.needToRaise = needToRaise;
+        this.name = name;
+        this.domainId = domainId;
+        this.description = description;
+    }
 
     public int getId() {
         return id;

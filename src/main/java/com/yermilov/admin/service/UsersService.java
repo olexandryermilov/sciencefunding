@@ -46,11 +46,11 @@ public class UsersService {
      * @param limit How much records should be returned
      * @return List of users to display
      * @throws DAOException Re-throws DAOException from UserDAO
-     *  UserDAO#findLimitedAmount(int, int)
+     * @see UserDAO#getLimitedAmountOfUsers(int, int)
      */
     public List<User> getUsers(int from, int limit) throws DAOException{
         UserDAO userDAO = daoFactory.getUserDAO();
-        List<User> users=userDAO.getLimitedAmountOfUsers(from,limit);
+        List<User> users=userDAO.getLimitedAmountOfUsers(limit,from);
         return users;
     }
 

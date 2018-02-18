@@ -9,6 +9,7 @@ import com.yermilov.dao.IDAOFactory;
 import com.yermilov.dao.UserDAO;
 import com.yermilov.domain.User;
 import com.yermilov.exception.DAOException;
+import com.yermilov.exception.LoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,11 +41,14 @@ public class LoginService {
      * @param password Password that user entered (not encrypted)
      * @return User if there exists a user with such email and password, null otherwise
      */
-    public User getUser(String email, String password) throws DAOException, SQLException {
+    public User getUser(String email, String password) throws DAOException, LoginException {
         UserDAO userDAO = daoFactory.getUserDAO();
         User user = userDAO.queryForEmail(email);
         if(user==null){
             return null;
+        }
+        if(user.getIsActive()==0){
+            throw new LoginException("User is deleted, please contact admin to learn how to recover your profile.");
         }
         LOGGER.info("User "+email+" tried to login.");
         return (password.equals(user.getPassword()))?user:null;

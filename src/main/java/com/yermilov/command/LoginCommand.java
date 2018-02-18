@@ -2,6 +2,7 @@ package com.yermilov.command;
 
 import com.yermilov.domain.User;
 import com.yermilov.exception.DAOException;
+import com.yermilov.exception.LoginException;
 import com.yermilov.services.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +51,10 @@ public class LoginCommand implements Command {
             }
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
+        } catch (LoginException e) {
+            LOGGER.info(e.getMessage());
+            request.setAttribute("errorMessageLogin", e.getMessage());
+            request.getRequestDispatcher(CommandFactory.LOGIN+".jsp").forward(request, response);
         }
     }
     @Override

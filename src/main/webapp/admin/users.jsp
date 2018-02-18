@@ -9,33 +9,28 @@
                     <td>Name</td>
                     <td>Surname</td>
                     <td>Email</td>
-                    <td>To Delete</td>
-                    <td>Register as driver</td>
-                    <td>Add car to driver</td>
+                    <td>Is active</td>
+                    <td>Change state</td>
+                    <td>Register as scientist</td>
                 </tr>
                 <jsp:useBean id="users" type="java.util.List<com.yermilov.domain.User>" scope="request"/>
 
                 <c:forEach var="user" items="${users}"><tr>
-                    <td>${user.userId}</td>
+                    <td>${user.id}</td>
                     <td>${user.name}</td>
                     <td>${user.surname}</td>
                     <td>${user.email}</td>
+                    <td>${user.isActive}</td>
                     <td><form action="controller" method="post">
                         <input type="hidden" name="command" value="delete" />
-                        <input type="hidden" name="userid" value=${user.userId} >
-                        <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Delete user</button>
+                        <input type="hidden" name="userid" value=${user.id} >
+                        <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Change state</button>
                     </form></td>
                     <td>
                         <form action="controller" method="post">
-                            <input type="hidden" name="command" value="registerDriver"/>
-                            <input type="hidden" name="userid" value=${user.userId} >
-                            <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Make a Driver</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="addCar.jsp" method="get">
-                            <input type="hidden" name="userid" value=${user.userId} >
-                            <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Add car</button>
+                            <input type="hidden" name="command" value="registerScientist"/>
+                            <input type="hidden" name="userid" value=${user.id} >
+                            <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Register as scientist</button>
                         </form>
                     </td>
                 </tr></c:forEach>
@@ -45,7 +40,7 @@
         <label class="w3-text-red">${errorMessage}</label>
         </form>
         <div class="w3-container w3-opacity w3-right-align w3-padding">
-            <button class="w3-btn w3-green w3-round-large w3-border" onclick="location.href='/taxiproject/admin'">Back to main</button>
+            <button class="w3-btn w3-green w3-round-large w3-border" onclick="location.href='/sciencefunding/admin'">Back to main</button>
         </div>
         <br><br>
         <!--{users}></!-->

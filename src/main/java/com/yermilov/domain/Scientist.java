@@ -7,20 +7,20 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Scientist {
     @DatabaseField(generatedId =true)
     private Integer id;
-    @DatabaseField
-    private int userId;
-    @DatabaseField
-    private int domainId;
-    @DatabaseField
-    private int organisationId;
+    @DatabaseField(foreign = true)
+    private User user;
+    @DatabaseField (foreign = true)
+    private Domain domain;
+    @DatabaseField(foreign = true)
+    private Organisation organisation;
 
     public Scientist() {
     }
 
-    public Scientist(int userId, int domainId, int organisationId) {
-        this.userId = userId;
-        this.domainId = domainId;
-        this.organisationId = organisationId;
+    public Scientist(User user, Domain domain, Organisation organisation) {
+        this.user = user;
+        this.domain = domain;
+        this.organisation = organisation;
     }
 
     public Integer getId() {
@@ -31,59 +31,27 @@ public class Scientist {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getDomainId() {
-        return domainId;
+    public Domain getDomain() {
+        return domain;
     }
 
-    public void setDomainId(int domainId) {
-        this.domainId = domainId;
+    public void setDomain(Domain domain) {
+        this.domain = domain;
     }
 
-    public int getOrganisationId() {
-        return organisationId;
+    public Organisation getOrganisation() {
+        return organisation;
     }
 
-    public void setOrganisationId(int organisationId) {
-        this.organisationId = organisationId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Scientist scientist = (Scientist) o;
-
-        if (id != scientist.id) return false;
-        if (userId != scientist.userId) return false;
-        if (domainId != scientist.domainId) return false;
-        return organisationId == scientist.organisationId;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + userId;
-        result = 31 * result + domainId;
-        result = 31 * result + organisationId;
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Scientist{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", domainId=" + domainId +
-                ", organisationId=" + organisationId +
-                '}';
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
     }
 }

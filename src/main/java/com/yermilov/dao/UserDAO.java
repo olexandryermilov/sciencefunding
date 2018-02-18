@@ -2,9 +2,7 @@ package com.yermilov.dao;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.Where;
+import com.j256.ormlite.stmt.*;
 import com.yermilov.domain.User;
 import com.yermilov.exception.DAOException;
 import com.yermilov.transaction.DatabaseConnector;
@@ -53,8 +51,31 @@ public class UserDAO {
     public List<User> getLimitedAmountOfUsers(int limit, int skip) throws DAOException {
         try {
             QueryBuilder<User,Long> queryBuilder = userDao.queryBuilder();
-            PreparedQuery<User> preparedQuery =queryBuilder.limit((long) limit).offset((long) (skip+1)).prepare();
+            PreparedQuery<User> preparedQuery =queryBuilder.limit((long) limit).offset((long) (skip)).prepare();
             return userDao.query(preparedQuery);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
+
+    public int changeUserState(long userid) throws DAOException {
+        try{
+            QueryBuilder<User,Long> queryBuilder = userDao.queryBuilder();
+            PreparedQuery<User>preparedQuery = queryBuilder.where().eq("id",userid).prepare();
+            User user = queryBuilder.queryForFirst();
+            UpdateBuilder<User, Long> updateBuilder =userDao.updateBuilder();
+            updateBuilder.updateColumnValue(User.IS_ACTIVE_FIELD_NAME, 1-user.getIsActive());
+            updateBuilder.where().idEq(userid);
+            updateBuilder.update();
+            return 1;
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
+
+    public User queryForId(long userid) throws DAOException{
+        try {
+            return userDao.queryForId(userid);
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());
         }

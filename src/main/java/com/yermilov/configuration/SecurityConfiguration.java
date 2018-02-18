@@ -17,7 +17,7 @@ public class SecurityConfiguration {
         grant.put(CommandFactory.REGISTRATION,ALL);
         grant.put(CommandFactory.LOGOUT,AUTH);
         grant.put(CommandFactory.USERS,ADMIN);
-        grant.put(CommandFactory.DELETE,ADMIN);
+        grant.put(CommandFactory.CHANGE_STATE,ADMIN);
         grant.put(CommandFactory.ADMIN_LOGIN,ALL);
         grant.put(CommandFactory.ADMIN_LOGOUT,ALL);
         grant.put("/",ALL);

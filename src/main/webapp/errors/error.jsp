@@ -3,7 +3,7 @@
 <c:import url="/header.jsp" />
     <label class="w3-text">Ooops. Something went wrong. You probably want to return to main</label>
 <div class="w3-container w3-opacity w3-right-align w3-padding">
-    <button class="w3-btn w3-green w3-round-large w3-border" onclick="location.href='/taxiproject'">Back to main</button>
+    <button class="w3-btn w3-green w3-round-large w3-border" onclick="location.href='/sciencefunding'">Back to main</button>
 </div>
 </body>
 </html>

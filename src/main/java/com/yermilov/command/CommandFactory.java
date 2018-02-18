@@ -13,7 +13,7 @@ public class CommandFactory {
     public final static String USERS = "users";
     public final static String ADMIN_LOGIN="adminLogin";
     public final static String ADMIN_LOGOUT="adminLogout";
-    public final static String DELETE = "delete";
+    public final static String CHANGE_STATE = "delete";
     private Map<String,Command> commandMap = new HashMap<>();
     private CommandFactory(){
         commandMap.put(LOGIN,new com.yermilov.command.LoginCommand());
@@ -21,7 +21,7 @@ public class CommandFactory {
         commandMap.put(LOGOUT, new LogoutCommand());
         commandMap.put(USERS,new UsersCommand());
         commandMap.put(ADMIN_LOGIN,new com.yermilov.admin.command.LoginCommand());
-        commandMap.put(DELETE, new DeleteCommand());
+        commandMap.put(CHANGE_STATE, new ChangeUserStateCommand());
         commandMap.put(ADMIN_LOGOUT,new com.yermilov.admin.command.LogoutCommand());
     }
     public static CommandFactory getInstance() {

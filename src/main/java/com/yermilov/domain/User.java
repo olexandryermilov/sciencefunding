@@ -7,6 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public class User {
     public static final String EMAIL_FIELD_NAME = "email";
     public static final String PASSWORD_FIELD_NAME = "password";
+    public static final String IS_ACTIVE_FIELD_NAME = "is_active";
     @DatabaseField(generatedId = true)
     private Long id;
     @DatabaseField
@@ -17,6 +18,8 @@ public class User {
     private String name;
     @DatabaseField
     private String surname;
+    @DatabaseField(columnName = "is_active")
+    private Integer isActive;
 
     public User(){
 
@@ -26,6 +29,14 @@ public class User {
         this.password=password;
         this.name=name;
         this.surname=surname;
+        this.isActive=1;
+    }
+    public User(String email, String password, String name, String surname, int isActive){
+        this.email=email;
+        this.password=password;
+        this.name=name;
+        this.surname=surname;
+        this.isActive=isActive;
     }
     public Long getId() {
         return id;
@@ -67,6 +78,14 @@ public class User {
         this.surname = surname;
     }
 
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,7 +99,6 @@ public class User {
         if (!name.equals(user.name)) return false;
         return surname.equals(user.surname);
     }
-
     @Override
     public int hashCode() {
         int result = (id!=null)?id.intValue():0;

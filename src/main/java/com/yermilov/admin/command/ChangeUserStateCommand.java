@@ -21,7 +21,7 @@ public class ChangeUserStateCommand implements Command {
         try {
             changeUserStateService.delete(idToDelete);
             LOGGER.info("Successfully changed state");
-            request.getRequestDispatcher("controller?command=users&pageNumber="+request.getParameter("pageNumber")).forward(request,response);
+            request.getRequestDispatcher("controller?command=users&pageNumber=1"/*+request.getParameter("pageNumber")*/).forward(request,response);
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());
         }

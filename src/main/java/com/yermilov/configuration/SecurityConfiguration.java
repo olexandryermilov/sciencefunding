@@ -19,6 +19,7 @@ public class SecurityConfiguration {
         grant.put(CommandFactory.USERS,ADMIN);
         grant.put(CommandFactory.CHANGE_STATE,ADMIN);
         grant.put(CommandFactory.ADMIN_LOGIN,ALL);
+        grant.put(CommandFactory.ADD_SCIENTIST,ADMIN);
         grant.put(CommandFactory.ADMIN_LOGOUT,ALL);
         grant.put("/",ALL);
         grant.put("registration.jsp",ALL);
@@ -28,6 +29,7 @@ public class SecurityConfiguration {
         grant.put("users.jsp",ADMIN);
         grant.put("header.jsp",NO_ACCESS);
         grant.put("main.jsp",NO_ACCESS);
+
     }
 
     public static SecurityConfiguration getInstance() {

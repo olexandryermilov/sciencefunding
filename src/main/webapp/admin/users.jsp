@@ -28,7 +28,7 @@
                     </form></td>
                     <td>
                         <form action="controller" method="post">
-                            <input type="hidden" name="command" value="registerScientist"/>
+                            <input type="hidden" name="command" value="addScientist"/>
                             <input type="hidden" name="userid" value=${user.id} >
                             <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Register as scientist</button>
                         </form>

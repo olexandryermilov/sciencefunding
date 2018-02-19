@@ -50,9 +50,10 @@ public class CampaignService {
      * @throws DAOException Re-throws DAOException from CampaignDAO
      * @see CampaignDAO#getLimitedAmountOfCampaigns(int, int)
      */
-    public List<Campaign> getCampaigns(int from, int limit) throws DAOException{
+    public List<Campaign> getCampaigns(int from, int limit, boolean onlyActive) throws DAOException{
         CampaignDAO campaignDAO = daoFactory.getCampaignDAO();
-        List<Campaign> campaigns=campaignDAO.getLimitedAmountOfCampaigns(limit,from);
+        List<Campaign> campaigns=(onlyActive)?campaignDAO.getLimitedAmountOfActiveCampaigns(limit,from)
+                                             :campaignDAO.getLimitedAmountOfCampaigns(limit,from);
         return campaigns;
     }
 

@@ -23,7 +23,12 @@
                     <td><form action="controller" method="get">
                         <input type="hidden" name="command" value="changeCampaignState" />
                         <input type="hidden" name="campaignid" value=${campaign.id} >
-                        <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Learn more</button>
+                        <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">
+                            <c:choose>
+                                <c:when test="${campaign.isActive==1}">Block campaign</c:when>
+                                <c:when test="${campaign.isActive==0}">Unblock campaign</c:when>
+                            </c:choose>
+                        </button>
                     </form></td>
                 </tr></c:forEach>
             </table>

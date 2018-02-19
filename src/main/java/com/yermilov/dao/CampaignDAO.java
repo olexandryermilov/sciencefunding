@@ -53,10 +53,21 @@ public class CampaignDAO {
             throw new DAOException(e.getMessage());
         }
     }
+    public List<Campaign> getLimitedAmountOfActiveCampaigns(int limit, int skip) throws DAOException {
+        try {
+            QueryBuilder<Campaign, Integer> queryBuilder = campaignDao.queryBuilder();
+            PreparedQuery<Campaign> preparedQuery =queryBuilder.
+                    limit((long) limit).offset((long) (skip)).where().eq(Campaign.IS_ACTIVE_FIELD_NAME,1).prepare();
+            return campaignDao.query(preparedQuery);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
     public List<Campaign> getLimitedAmountOfCampaigns(int limit, int skip) throws DAOException {
         try {
             QueryBuilder<Campaign, Integer> queryBuilder = campaignDao.queryBuilder();
-            PreparedQuery<Campaign> preparedQuery =queryBuilder.limit((long) limit).offset((long) (skip)).prepare();
+            PreparedQuery<Campaign> preparedQuery =queryBuilder.
+                    limit((long) limit).offset((long) (skip)).prepare();
             return campaignDao.query(preparedQuery);
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());

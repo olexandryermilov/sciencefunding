@@ -26,8 +26,8 @@ public class CampaignsCommand implements Command {
             if(pageSizeParam==null)pageSizeParam="5";
             int pageNum = Integer.parseInt(pageNumberParam);
             int pageSize = Integer.parseInt(pageSizeParam);
-
-            List<Campaign> allCampaigns = campaignService.getCampaigns((pageNum-1)*pageSize,pageSize);
+            boolean neededOnlyActive = !req.getRequestURI().contains("admin");
+            List<Campaign> allCampaigns = campaignService.getCampaigns((pageNum-1)*pageSize,pageSize,neededOnlyActive);
             req.setAttribute("pageAmount",((campaignService.getTableSize()+pageSize-1)/pageSize));
             req.setAttribute("campaigns",allCampaigns);
             req.getRequestDispatcher("campaigns.jsp").forward(req,resp);

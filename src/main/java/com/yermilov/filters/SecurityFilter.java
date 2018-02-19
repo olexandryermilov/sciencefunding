@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -40,6 +42,7 @@ public class SecurityFilter implements Filter {
 
         String role=securityConfiguration.security(command);
         LOGGER.debug("Command is {}, role is {}",command,role);
+        if(Objects.equals(command, "campaigns") && httpServletRequest.getRequestURI().contains("admin"))role=SecurityConfiguration.ADMIN;
         if(SecurityConfiguration.NO_ACCESS.equals(role)){
             chain.doFilter(request,response);
             httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);

@@ -10,9 +10,9 @@ Hi, <c:out value="${admin.email}"/> !
 </button>
 </form>
 <form action="controller" method="GET">
-    <input type="hidden" name="command" value="taxitypes"/>
+    <input type="hidden" name="command" value="campaigns"/>
     <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">
-        Watch taxitypes list
+        Watch campaigns list
     </button>
 </form>
 <form action="controller" method="GET">

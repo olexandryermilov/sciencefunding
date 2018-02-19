@@ -1,9 +1,8 @@
-package com.yermilov.admin.command;
+package com.yermilov.command;
 
-import com.yermilov.command.Command;
-import com.yermilov.domain.User;
-import com.yermilov.admin.service.UsersService;
+import com.yermilov.domain.Campaign;
 import com.yermilov.exception.DAOException;
+import com.yermilov.services.CampaignService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class UsersCommand implements Command {
-    private final static Logger LOGGER = LoggerFactory.getLogger(UsersCommand.class);
+public class CampaignsCommand implements Command {
+    private final static Logger LOGGER = LoggerFactory.getLogger(CampaignsCommand.class);
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UsersService usersService = UsersService.getUsersService();
+        CampaignService campaignService = CampaignService.getCampaignService();
         try{
             String pageNumberParam = req.getParameter("pageNumber");
             String pageSizeParam = req.getParameter("pageSize");
@@ -28,15 +27,15 @@ public class UsersCommand implements Command {
             int pageNum = Integer.parseInt(pageNumberParam);
             int pageSize = Integer.parseInt(pageSizeParam);
 
-            List<User> allUsers = usersService.getUsers((pageNum-1)*pageSize,pageSize);
-            req.setAttribute("pageAmount",((usersService.getTableSize()+pageSize-1)/pageSize));
-            req.setAttribute("users",allUsers);
-            req.getRequestDispatcher("users.jsp").forward(req,resp);
+            List<Campaign> allCampaigns = campaignService.getCampaigns((pageNum-1)*pageSize,pageSize);
+            req.setAttribute("pageAmount",((campaignService.getTableSize()+pageSize-1)/pageSize));
+            req.setAttribute("campaigns",allCampaigns);
+            req.getRequestDispatcher("campaigns.jsp").forward(req,resp);
         }
         catch(NumberFormatException e){
             LOGGER.error(e.getMessage());
             req.setAttribute("errorMessage","Page number and page size must be a positive integer number.");
-            req.getRequestDispatcher("users.jsp").forward(req,resp);
+            req.getRequestDispatcher("campaigns.jsp").forward(req,resp);
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());
         }

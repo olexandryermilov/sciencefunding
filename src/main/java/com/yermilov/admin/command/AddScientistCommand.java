@@ -1,9 +1,7 @@
 package com.yermilov.admin.command;
 
 import com.yermilov.admin.service.AddScientistService;
-import com.yermilov.admin.service.ChangeUserStateService;
 import com.yermilov.command.Command;
-import com.yermilov.domain.User;
 import com.yermilov.exception.AddScientistException;
 import com.yermilov.exception.DAOException;
 import org.slf4j.Logger;
@@ -13,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 public class AddScientistCommand implements Command {
     private final static Logger LOGGER = LoggerFactory.getLogger(AddScientistCommand.class);

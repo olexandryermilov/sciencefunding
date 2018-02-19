@@ -4,6 +4,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
 import com.yermilov.domain.*;
 import com.yermilov.exception.DAOException;
@@ -62,4 +63,18 @@ public class CampaignDAO {
         }
     }
 
+    public int changeCampaignState(int campaignid) throws DAOException {
+        try{
+            QueryBuilder<Campaign, Integer> queryBuilder = campaignDao.queryBuilder();
+            PreparedQuery<Campaign>preparedQuery = queryBuilder.where().eq("id",campaignid).prepare();
+            Campaign campaign = queryBuilder.queryForFirst();
+            UpdateBuilder<Campaign, Integer> updateBuilder =campaignDao.updateBuilder();
+            updateBuilder.updateColumnValue(Campaign.IS_ACTIVE_FIELD_NAME, 1-campaign.getIsActive());
+            updateBuilder.where().idEq(campaignid);
+            updateBuilder.update();
+            return 1;
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
 }

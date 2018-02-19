@@ -10,19 +10,19 @@ import org.slf4j.LoggerFactory;
  *  Service for changing state of user's activeness
  *  @see ChangeUserStateCommand
  */
-public class ChangeUserStateService {
-    private final static Logger LOGGER = LoggerFactory.getLogger(ChangeUserStateService.class);
-    private final static ChangeUserStateService CHANGE_USER_STATE_SERVICE = new ChangeUserStateService();
+public class ChangeStateService {
+    private final static Logger LOGGER = LoggerFactory.getLogger(ChangeStateService.class);
+    private final static ChangeStateService CHANGE_STATE_SERVICE = new ChangeStateService();
     private IDAOFactory daoFactory;
-    private ChangeUserStateService(){
+    private ChangeStateService(){
         daoFactory= DAOFactory.getInstance();
     }
     /**
      *
      * @return Instance of this class
      */
-    public static ChangeUserStateService getChangeUserStateService(){
-        return CHANGE_USER_STATE_SERVICE;
+    public static ChangeStateService getChangeStateService(){
+        return CHANGE_STATE_SERVICE;
     }
 
     /**
@@ -31,9 +31,15 @@ public class ChangeUserStateService {
      * @return true if deletes successfully
      * @throws DAOException Re-throws DAOException from UserDAO, ClientDAO or DriverDAO methods
      */
-    public boolean delete(int idToDelete) throws DAOException {
+    public boolean deleteUser(int idToDelete) throws DAOException {
         UserDAO userDAO = daoFactory.getUserDAO();
         userDAO.changeUserState(idToDelete);
+        return true;
+    }
+
+    public boolean deleteCampaign(int idToDelete) throws DAOException {
+        CampaignDAO campaignDAO = daoFactory.getCampaignDAO();
+        campaignDAO.changeCampaignState(idToDelete);
         return true;
     }
 }

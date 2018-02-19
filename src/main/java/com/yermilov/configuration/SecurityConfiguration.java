@@ -1,5 +1,6 @@
 package com.yermilov.configuration;
 
+import com.yermilov.command.Command;
 import com.yermilov.command.CommandFactory;
 
 import java.util.HashMap;
@@ -22,6 +23,8 @@ public class SecurityConfiguration {
         grant.put(CommandFactory.ADD_SCIENTIST,ADMIN);
         grant.put(CommandFactory.ADMIN_LOGOUT,ALL);
         grant.put(CommandFactory.ADD_CAMPAIGN,AUTH);
+        grant.put(CommandFactory.CAMPAIGNS,AUTH);
+        grant.put(CommandFactory.CHANGE_CAMPAIGN_STATE,ADMIN);
         grant.put("/",ALL);
         grant.put("registration.jsp",ALL);
         grant.put("login.jsp",ALL);
@@ -31,6 +34,7 @@ public class SecurityConfiguration {
         grant.put(CommandFactory.ADD_CAMPAIGN+".jsp",AUTH);
         grant.put("header.jsp",NO_ACCESS);
         grant.put("main.jsp",NO_ACCESS);
+        grant.put(CommandFactory.CAMPAIGNS+".jsp",AUTH);
 
     }
 

@@ -5,6 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "campaign")
 public class Campaign {
+    public static final String IS_ACTIVE_FIELD_NAME="is_active";
     @DatabaseField(generatedId=true)
     private Integer id;
     @DatabaseField(foreign = true)
@@ -17,6 +18,9 @@ public class Campaign {
     private Domain domain;
     @DatabaseField
     private String description;
+    @DatabaseField(columnName = "is_active", defaultValue = "1")
+    private Integer isActive;
+
 
     public Campaign() {
     }
@@ -27,6 +31,7 @@ public class Campaign {
         this.name = name;
         this.domain = domain;
         this.description = description;
+        this.isActive=1;
     }
 
     public void setId(Integer id) {
@@ -81,5 +86,11 @@ public class Campaign {
         this.description = description;
     }
 
+    public Integer getIsActive() {
+        return isActive;
+    }
 
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
+    }
 }

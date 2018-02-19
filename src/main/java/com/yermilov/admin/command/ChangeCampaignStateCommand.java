@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ChangeUserStateCommand implements Command {
-    private final static Logger LOGGER = LoggerFactory.getLogger(ChangeUserStateCommand.class);
+public class ChangeCampaignStateCommand implements Command {
+    private final static Logger LOGGER = LoggerFactory.getLogger(ChangeCampaignStateCommand.class);
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ChangeStateService changeStateService = ChangeStateService.getChangeStateService();
-        int idToDelete = Integer.parseInt(request.getParameter("userid"));
+        int idToDelete = Integer.parseInt(request.getParameter("campaignid"));
         LOGGER.info("Trying to delete next user: userid={}",idToDelete);
         try {
-            changeStateService.deleteUser(idToDelete);
+            changeStateService.deleteCampaign(idToDelete);
             LOGGER.info("Successfully changed state");
-            request.getRequestDispatcher("controller?command=users&pageNumber=1"/*+request.getParameter("pageNumber")*/).forward(request,response);
+            request.getRequestDispatcher("controller?command=campaigns&pageNumber=1"/*+request.getParameter("pageNumber")*/).forward(request,response);
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());
         }

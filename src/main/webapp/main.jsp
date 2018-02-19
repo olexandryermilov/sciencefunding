@@ -4,9 +4,10 @@ Hi, <c:out value="${currentUser.name}"/>
 <br>
 <button class="w3-btn w3-green w3-round-large w3-margin-bottom" onclick="location.href='/sciencefunding/addCampaign.jsp'">Add campaign</button>
 <form name="logoutForm" method="GET" action="controller" >
-        <input type="hidden" name="command" value="ridesStatistics" />
+        <input type="hidden" name="command" value="campaigns" />
         <input type ="hidden" name="pageNumber" value="1"/>
-        <button type="submit" class="w3-btn w3-green w3-round-large ">Statistics</button>
+        <input type ="hidden" name="pageSize" value="5"/>
+        <button type="submit" class="w3-btn w3-green w3-round-large ">Campaigns</button>
 </form>
 <form name="logoutForm" method="POST" action="controller" class="w3-right-align" >
         <input type="hidden" name="command" value="logout" />

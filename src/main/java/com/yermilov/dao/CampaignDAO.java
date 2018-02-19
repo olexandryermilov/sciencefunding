@@ -10,6 +10,7 @@ import com.yermilov.exception.DAOException;
 import com.yermilov.transaction.DatabaseConnector;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Wrapper for dao provided by ORMLite
@@ -39,6 +40,23 @@ public class CampaignDAO {
             QueryBuilder<Organiser,Integer> organiserQueryBuilder = organiserDao.queryBuilder();
             Organiser organiser = organiserQueryBuilder.join(scientistQueryBuilder).queryForFirst();
             return create(new Campaign(organiser,needToRaise,name,new Domain(),description));
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
+
+    public long getSize() throws DAOException{
+        try {
+            return campaignDao.countOf();
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
+    public List<Campaign> getLimitedAmountOfCampaigns(int limit, int skip) throws DAOException {
+        try {
+            QueryBuilder<Campaign, Integer> queryBuilder = campaignDao.queryBuilder();
+            PreparedQuery<Campaign> preparedQuery =queryBuilder.limit((long) limit).offset((long) (skip)).prepare();
+            return campaignDao.query(preparedQuery);
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());
         }

@@ -2,10 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 Hi, <c:out value="${currentUser.name}"/>
 <br>
-<form name="logoutForm" method="GET" action="controller" >
-        <input type="hidden" name="command" value="rideOrder">
-        <button type="submit" class="w3-btn w3-green w3-round-large ">Take a ride</button>
-</form>
+<button class="w3-btn w3-green w3-round-large w3-margin-bottom" onclick="location.href='/sciencefunding/addCampaign.jsp'">Add campaign</button>
 <form name="logoutForm" method="GET" action="controller" >
         <input type="hidden" name="command" value="ridesStatistics" />
         <input type ="hidden" name="pageNumber" value="1"/>

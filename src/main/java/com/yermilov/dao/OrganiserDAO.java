@@ -29,4 +29,7 @@ public class OrganiserDAO {
         }
     }
 
+    public Dao<Organiser, Integer> getOrganiserDao() {
+        return organiserDao;
+    }
 }

@@ -21,12 +21,14 @@ public class SecurityConfiguration {
         grant.put(CommandFactory.ADMIN_LOGIN,ALL);
         grant.put(CommandFactory.ADD_SCIENTIST,ADMIN);
         grant.put(CommandFactory.ADMIN_LOGOUT,ALL);
+        grant.put(CommandFactory.ADD_CAMPAIGN,AUTH);
         grant.put("/",ALL);
         grant.put("registration.jsp",ALL);
         grant.put("login.jsp",ALL);
         grant.put("index.jsp",ALL);
         grant.put("admin",ALL);
         grant.put("users.jsp",ADMIN);
+        grant.put(CommandFactory.ADD_CAMPAIGN+".jsp",AUTH);
         grant.put("header.jsp",NO_ACCESS);
         grant.put("main.jsp",NO_ACCESS);
 

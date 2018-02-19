@@ -15,6 +15,7 @@ public class CommandFactory {
     public final static String ADMIN_LOGOUT="adminLogout";
     public final static String CHANGE_STATE = "delete";
     public final static String ADD_SCIENTIST = "addScientist";
+    public final static String ADD_CAMPAIGN = "addCampaign";
     private Map<String,Command> commandMap = new HashMap<>();
     private CommandFactory(){
         commandMap.put(LOGIN,new com.yermilov.command.LoginCommand());
@@ -25,6 +26,7 @@ public class CommandFactory {
         commandMap.put(CHANGE_STATE, new ChangeUserStateCommand());
         commandMap.put(ADMIN_LOGOUT,new com.yermilov.admin.command.LogoutCommand());
         commandMap.put(ADD_SCIENTIST, new AddScientistCommand());
+        commandMap.put(ADD_CAMPAIGN, new AddCampaignCommand());
     }
     public static CommandFactory getInstance() {
         return factory;

@@ -52,5 +52,9 @@ public class ScientistDAO {
             throw new DAOException(e.getMessage());
         }
     }
+
+    public Dao<Scientist, Long> getScientistDao() {
+        return scientistDao;
+    }
 }
 

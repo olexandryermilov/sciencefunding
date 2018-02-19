@@ -7,18 +7,34 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Organiser {
     @DatabaseField(generatedId=true)
     private Integer id;
-    @DatabaseField
-    private int scientistId;
-    @DatabaseField
-    private int organisationId;
+    @DatabaseField(foreign = true)
+    private Scientist scientist;
+    @DatabaseField(foreign = true)
+    private Organisation organisation;
 
-    public Organiser(int scientistId, int organisationId) {
-        this.scientistId = scientistId;
-        this.organisationId = organisationId;
+    public Organiser(Scientist scientist, Organisation organisation) {
+        this.scientist = scientist;
+        this.organisation = organisation;
     }
 
     public Organiser() {
 
+    }
+
+    public Scientist getScientist() {
+        return scientist;
+    }
+
+    public void setScientist(Scientist scientist) {
+        this.scientist = scientist;
+    }
+
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
     }
 
     public Integer getId() {
@@ -29,22 +45,6 @@ public class Organiser {
         this.id = id;
     }
 
-    public int getScientistId() {
-        return scientistId;
-    }
-
-    public void setScientistId(int scientistId) {
-        this.scientistId = scientistId;
-    }
-
-    public int getOrganisationId() {
-        return organisationId;
-    }
-
-    public void setOrganisationId(int organisationId) {
-        this.organisationId = organisationId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,16 +52,16 @@ public class Organiser {
 
         Organiser organiser = (Organiser) o;
 
-        if (id != organiser.id) return false;
-        if (scientistId != organiser.scientistId) return false;
-        return organisationId == organiser.organisationId;
+        if (id != null ? !id.equals(organiser.id) : organiser.id != null) return false;
+        if (scientist != null ? !scientist.equals(organiser.scientist) : organiser.scientist != null) return false;
+        return organisation != null ? organisation.equals(organiser.organisation) : organiser.organisation == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + scientistId;
-        result = 31 * result + organisationId;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (scientist != null ? scientist.hashCode() : 0);
+        result = 31 * result + (organisation != null ? organisation.hashCode() : 0);
         return result;
     }
 
@@ -69,8 +69,8 @@ public class Organiser {
     public String toString() {
         return "Organiser{" +
                 "id=" + id +
-                ", scientistId=" + scientistId +
-                ", organisationId=" + organisationId +
+                ", scientist=" + scientist +
+                ", organisation=" + organisation +
                 '}';
     }
 }

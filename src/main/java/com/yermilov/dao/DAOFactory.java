@@ -1,11 +1,5 @@
 package com.yermilov.dao;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
-import com.yermilov.domain.Admin;
-import com.yermilov.domain.Scientist;
-import com.yermilov.domain.User;
-import com.yermilov.transaction.DatabaseConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,11 +15,15 @@ public class DAOFactory implements IDAOFactory {
     private AdminDAO adminDao;
     private UserDAO userDao;
     private ScientistDAO scientistDAO;
+    private CampaignDAO campaignDAO;
+    private OrganiserDAO organiserDAO;
     private DAOFactory(){
         try{
             adminDao = new AdminDAO();
             userDao = new UserDAO();
             scientistDAO = new ScientistDAO();
+            campaignDAO=new CampaignDAO();
+            organiserDAO =new OrganiserDAO();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
@@ -46,6 +44,16 @@ public class DAOFactory implements IDAOFactory {
         return scientistDAO;
     }
 
+    @Override
+    public OrganiserDAO getOrganiserDAO() {
+        return organiserDAO;
+    }
+
+    @Override
+    public CampaignDAO getCampaignDAO() {
+        return campaignDAO;
+    }
+
     public void setScientistDAO(ScientistDAO scientistDAO) {
         this.scientistDAO = scientistDAO;
     }
@@ -56,5 +64,13 @@ public class DAOFactory implements IDAOFactory {
 
     public void setUserDao(UserDAO userDao) {
         this.userDao = userDao;
+    }
+
+    public void setCampaignDAO(CampaignDAO campaignDAO) {
+        this.campaignDAO = campaignDAO;
+    }
+
+    public void setOrganiserDAO(OrganiserDAO organiserDAO) {
+        this.organiserDAO = organiserDAO;
     }
 }

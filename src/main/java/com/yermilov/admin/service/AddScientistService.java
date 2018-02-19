@@ -3,10 +3,8 @@ package com.yermilov.admin.service;
 import com.yermilov.admin.command.ChangeUserStateCommand;
 import com.yermilov.dao.DAOFactory;
 import com.yermilov.dao.IDAOFactory;
-import com.yermilov.dao.ScientistDAO;
 import com.yermilov.dao.UserDAO;
-import com.yermilov.domain.Scientist;
-import com.yermilov.domain.User;
+import com.yermilov.domain.*;
 import com.yermilov.exception.AddScientistException;
 import com.yermilov.exception.DAOException;
 import org.slf4j.Logger;
@@ -48,6 +46,9 @@ public class AddScientistService {
         scientist = new Scientist();
         scientist.setUser(user);
         daoFactory.getScientistDAO().create(scientist);
+        Organiser organiser = new Organiser();
+        organiser.setScientist(scientist);
+        daoFactory.getOrganiserDAO().create(organiser);
         return true;
     }
 

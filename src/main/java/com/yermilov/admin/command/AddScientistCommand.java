@@ -23,8 +23,8 @@ public class AddScientistCommand implements Command {
         int userid = Integer.parseInt(request.getParameter("userid"));
         try {
             addScientistService.registerAsScientist(userid);
-            request.getRequestDispatcher("controller?command=users&pageNumber=1").forward(request,response);
             request.setAttribute("errorMessage","User is registered as scientist");
+            request.getRequestDispatcher("controller?command=users&pageNumber=1").forward(request,response);
             LOGGER.info("User with userid={} is registered as scientist",userid);
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());

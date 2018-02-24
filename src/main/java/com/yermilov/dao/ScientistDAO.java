@@ -42,7 +42,7 @@ public class ScientistDAO {
         }
     }
 
-    public Scientist queryForUserId(int userid) throws DAOException{
+    public Scientist queryForUserId(long userid) throws DAOException{
         try{
             QueryBuilder<Scientist, Long> queryBuilder = scientistDao.queryBuilder();
             queryBuilder.where().eq("user_id",userid);

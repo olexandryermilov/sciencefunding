@@ -16,7 +16,7 @@ public class ChangeUserStateCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ChangeStateService changeStateService = ChangeStateService.getChangeStateService();
-        int idToDelete = Integer.parseInt(request.getParameter("userid"));
+        long idToDelete = Long.parseLong(request.getParameter("userid"));
         LOGGER.info("Trying to delete next user: userid={}",idToDelete);
         try {
             changeStateService.deleteUser(idToDelete);

@@ -35,7 +35,7 @@ public class AddScientistService {
      * @return true if deletes successfully
      * @throws DAOException Re-throws DAOException from UserDAO, ClientDAO or DriverDAO methods
      */
-    public boolean registerAsScientist(int userid) throws DAOException, AddScientistException {
+    public boolean registerAsScientist(long userid) throws DAOException, AddScientistException {
         UserDAO userDAO = daoFactory.getUserDAO();
         User user = userDAO.queryForId(userid);
         Scientist scientist;

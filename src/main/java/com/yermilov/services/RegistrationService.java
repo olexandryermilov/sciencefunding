@@ -39,18 +39,25 @@ public class RegistrationService {
      *
      * @param email Email that user entered
      * @param password Password that user entered (not encrypted)
-     * @return User if there exists a user with such email and password, null otherwise
+     * @param name Name of user
+     * @param surname Surname of user
+     * @throws RegistrationException When smth went wrong
      */
-    public void register(String email, String password, String name, String surname) throws DAOException, SQLException, RegistrationException {
+    public void register(String email, String password, String name, String surname) throws RegistrationException {
         UserDAO userDAO = daoFactory.getUserDAO();
-
-        User user = userDAO.queryForEmail(email);
-        if(user!=null){
-            throw new RegistrationException("Email already occupied");
+        User user = null;
+        try {
+            user = userDAO.queryForEmail(email);
+            if(user!=null){
+                throw new RegistrationException("Email already occupied");
+            }
+            user = new User(email,password,name,surname);
+            userDAO.create(user);
+            LOGGER.info("User "+email+" registered.");
+        } catch (DAOException e) {
+            throw new RegistrationException(e.getMessage());
         }
-        user = new User(email,password,name,surname);
-        userDAO.create(user);
-        LOGGER.info("User "+email+" registered.");
+
     }
     public void setDaoFactory(IDAOFactory daoFactory){
         this.daoFactory=daoFactory;

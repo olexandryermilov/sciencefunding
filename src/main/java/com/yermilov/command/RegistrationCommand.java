@@ -38,11 +38,6 @@ public class RegistrationCommand implements Command{
             req.setAttribute("errorMessage", e.getMessage());
             req.getRequestDispatcher(CommandFactory.REGISTRATION+".jsp").forward(req, resp);
         }
-        catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-        } catch (DAOException e) {
-            LOGGER.error(e.getMessage());
-        }
 
     }
     @Override

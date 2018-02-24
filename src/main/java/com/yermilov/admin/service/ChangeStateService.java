@@ -31,7 +31,7 @@ public class ChangeStateService {
      * @return true if deletes successfully
      * @throws DAOException Re-throws DAOException from UserDAO, ClientDAO or DriverDAO methods
      */
-    public boolean deleteUser(int idToDelete) throws DAOException {
+    public boolean deleteUser(long idToDelete) throws DAOException {
         UserDAO userDAO = daoFactory.getUserDAO();
         userDAO.changeUserState(idToDelete);
         return true;

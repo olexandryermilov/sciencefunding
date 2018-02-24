@@ -17,7 +17,7 @@ public class DAOFactory implements IDAOFactory {
     private ScientistDAO scientistDAO;
     private CampaignDAO campaignDAO;
     private OrganiserDAO organiserDAO;
-    private DAOFactory(){
+    public DAOFactory(){
         try{
             adminDao = new AdminDAO();
             userDao = new UserDAO();

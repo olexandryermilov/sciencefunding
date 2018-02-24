@@ -33,4 +33,7 @@ public class DatabaseConnector {
     public ConnectionSource getORMLiteConnectionSource() {
         return ORMLiteConnectionSource;
     }
+    public void setORMLiteConnectionSource(ConnectionSource connectionSource){
+        this.ORMLiteConnectionSource = connectionSource;
+    }
 }

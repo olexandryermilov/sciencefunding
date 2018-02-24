@@ -23,6 +23,9 @@ public class AdminDAO {
     public void setAdminDao(Dao<Admin,Long> adminDao) {
         this.adminDao = adminDao;
     }
+    public Dao<Admin,Long> getAdminDao(){
+        return this.adminDao;
+    }
     public int create(Admin admin) throws DAOException {
         try {
             return adminDao.create(admin);

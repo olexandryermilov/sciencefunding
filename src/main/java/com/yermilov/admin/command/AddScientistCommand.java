@@ -17,7 +17,7 @@ public class AddScientistCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AddScientistService addScientistService = AddScientistService.getAddScientistService();
-        int userid = Integer.parseInt(request.getParameter("userid"));
+        long userid = Long.parseLong(request.getParameter("userid"));
         try {
             addScientistService.registerAsScientist(userid);
             request.setAttribute("errorMessage","User is registered as scientist");

@@ -80,5 +80,9 @@ public class UserDAO {
             throw new DAOException(e.getMessage());
         }
     }
+
+    public Dao<User, Long> getUserDao() {
+        return userDao;
+    }
 }
 

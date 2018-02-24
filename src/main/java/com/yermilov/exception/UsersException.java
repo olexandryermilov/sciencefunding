@@ -1,4 +1,4 @@
-package com.yermilov.sciencefunding.exception;
+package com.yermilov.exception;
 
 public class UsersException extends Exception {
     public UsersException(){

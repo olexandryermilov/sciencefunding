@@ -7,10 +7,10 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Donation {
     @DatabaseField(generatedId=true)
     private Integer id;
-    @DatabaseField
-    private int fromUserId;
-    @DatabaseField
-    private int toCampaignId;
+    @DatabaseField(foreign = true, columnName = "from_user")
+    private User fromUser;
+    @DatabaseField(foreign = true, columnName = "to_campaign")
+    private Campaign toCampaign;
     @DatabaseField
     private int value;
     @DatabaseField
@@ -19,9 +19,9 @@ public class Donation {
     public Donation() {
     }
 
-    public Donation(int fromUserId, int toCampaignId, int value, String comment) {
-        this.fromUserId = fromUserId;
-        this.toCampaignId = toCampaignId;
+    public Donation(User fromUser, Campaign toCampaign, int value, String comment) {
+        this.fromUser = fromUser;
+        this.toCampaign = toCampaign;
         this.value = value;
         this.comment = comment;
     }
@@ -30,24 +30,24 @@ public class Donation {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getFromUserId() {
-        return fromUserId;
+    public User getFromUser() {
+        return fromUser;
     }
 
-    public void setFromUserId(int fromUserId) {
-        this.fromUserId = fromUserId;
+    public void setFromUser(User fromUser) {
+        this.fromUser = fromUser;
     }
 
-    public int getToCampaignId() {
-        return toCampaignId;
+    public Campaign getToCampaign() {
+        return toCampaign;
     }
 
-    public void setToCampaignId(int toCampaignId) {
-        this.toCampaignId = toCampaignId;
+    public void setToCampaign(Campaign toCampaign) {
+        this.toCampaign = toCampaign;
     }
 
     public int getValue() {
@@ -73,18 +73,18 @@ public class Donation {
 
         Donation donation = (Donation) o;
 
-        if (id != donation.id) return false;
-        if (fromUserId != donation.fromUserId) return false;
-        if (toCampaignId != donation.toCampaignId) return false;
         if (value != donation.value) return false;
+        if (id != null ? !id.equals(donation.id) : donation.id != null) return false;
+        if (fromUser != null ? !fromUser.equals(donation.fromUser) : donation.fromUser != null) return false;
+        if (toCampaign != null ? !toCampaign.equals(donation.toCampaign) : donation.toCampaign != null) return false;
         return comment != null ? comment.equals(donation.comment) : donation.comment == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + fromUserId;
-        result = 31 * result + toCampaignId;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (fromUser != null ? fromUser.hashCode() : 0);
+        result = 31 * result + (toCampaign != null ? toCampaign.hashCode() : 0);
         result = 31 * result + value;
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         return result;
@@ -94,8 +94,8 @@ public class Donation {
     public String toString() {
         return "Donation{" +
                 "id=" + id +
-                ", fromUserId=" + fromUserId +
-                ", toCampaignId=" + toCampaignId +
+                ", fromUser=" + fromUser +
+                ", toCampaign=" + toCampaign +
                 ", value=" + value +
                 ", comment='" + comment + '\'' +
                 '}';

@@ -6,4 +6,7 @@ public interface IDAOFactory {
     ScientistDAO getScientistDAO();
     OrganiserDAO getOrganiserDAO();
     CampaignDAO getCampaignDAO();
+    OrganisationDAO getOrganisationDAO();
+    DomainDAO getDomainDAO();
+    DonationDAO getDonationDAO();
 }

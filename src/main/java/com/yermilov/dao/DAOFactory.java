@@ -12,18 +12,24 @@ public class DAOFactory implements IDAOFactory {
         return DAO_FACTORY;
     }
 
-    private AdminDAO adminDao;
-    private UserDAO userDao;
+    private AdminDAO adminDAO;
+    private UserDAO userDAO;
     private ScientistDAO scientistDAO;
     private CampaignDAO campaignDAO;
     private OrganiserDAO organiserDAO;
+    private OrganisationDAO organisationDAO;
+    private DomainDAO domainDAO;
+    private DonationDAO donationDAO;
     public DAOFactory(){
         try{
-            adminDao = new AdminDAO();
-            userDao = new UserDAO();
+            adminDAO = new AdminDAO();
+            userDAO = new UserDAO();
             scientistDAO = new ScientistDAO();
             campaignDAO=new CampaignDAO();
             organiserDAO =new OrganiserDAO();
+            organisationDAO = new OrganisationDAO();
+            domainDAO=new DomainDAO();
+            donationDAO = new DonationDAO();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
@@ -31,12 +37,12 @@ public class DAOFactory implements IDAOFactory {
 
     @Override
     public AdminDAO getAdminDAO(){
-        return adminDao;
+        return adminDAO;
     }
 
     @Override
     public UserDAO getUserDAO(){
-        return userDao;
+        return userDAO;
     }
 
     @Override
@@ -54,16 +60,43 @@ public class DAOFactory implements IDAOFactory {
         return campaignDAO;
     }
 
+    @Override
+    public OrganisationDAO getOrganisationDAO() {
+        return organisationDAO;
+    }
+
+    @Override
+    public DomainDAO getDomainDAO() {
+        return domainDAO;
+    }
+
+    @Override
+    public DonationDAO getDonationDAO() {
+        return donationDAO;
+    }
+
+    public void setDonationDAO(DonationDAO donationDAO) {
+        this.donationDAO = donationDAO;
+    }
+
+    public void setDomainDAO(DomainDAO domainDAO) {
+        this.domainDAO = domainDAO;
+    }
+
+    public void setOrganisationDAO(OrganisationDAO organisationDAO) {
+        this.organisationDAO = organisationDAO;
+    }
+
     public void setScientistDAO(ScientistDAO scientistDAO) {
         this.scientistDAO = scientistDAO;
     }
 
-    public void setAdminDao(AdminDAO adminDao) {
-        this.adminDao = adminDao;
+    public void setAdminDAO(AdminDAO adminDAO) {
+        this.adminDAO = adminDAO;
     }
 
-    public void setUserDao(UserDAO userDao) {
-        this.userDao = userDao;
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     public void setCampaignDAO(CampaignDAO campaignDAO) {

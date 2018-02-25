@@ -9,15 +9,15 @@ public class Organisation {
     private Integer id;
     @DatabaseField
     private String name;
-    @DatabaseField
-    private int domainId;
+    @DatabaseField(foreign = true)
+    private Domain domain;
 
     public Organisation() {
     }
 
-    public Organisation(String name, int domainId) {
+    public Organisation(String name, Domain domain) {
         this.name = name;
-        this.domainId = domainId;
+        this.domain = domain;
     }
 
     public Integer getId() {
@@ -36,12 +36,12 @@ public class Organisation {
         this.name = name;
     }
 
-    public int getDomainId() {
-        return domainId;
+    public Domain getDomainId() {
+        return domain;
     }
 
-    public void setDomainId(int domainId) {
-        this.domainId = domainId;
+    public void setDomain(Domain domain) {
+        this.domain = domain;
     }
 
     @Override
@@ -51,16 +51,16 @@ public class Organisation {
 
         Organisation that = (Organisation) o;
 
-        if (domainId != that.domainId) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        return name != null ? name.equals(that.name) : that.name == null;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        return domain != null ? domain.equals(that.domain) : that.domain == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + domainId;
+        result = 31 * result + (domain != null ? domain.hashCode() : 0);
         return result;
     }
 
@@ -69,7 +69,7 @@ public class Organisation {
         return "Organisation{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", domainId=" + domainId +
+                ", domain=" + domain +
                 '}';
     }
 }

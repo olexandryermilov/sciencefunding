@@ -88,4 +88,8 @@ public class CampaignDAO {
             throw new DAOException(e.getMessage());
         }
     }
+
+    public Dao<Campaign, Integer> getCampaignDao() {
+        return campaignDao;
+    }
 }

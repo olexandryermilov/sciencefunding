@@ -12,13 +12,16 @@ public class Organiser {
     @DatabaseField(foreign = true)
     private Organisation organisation;
 
-    public Organiser(Scientist scientist, Organisation organisation) {
+    public Organiser(Scientist scientist) {
         this.scientist = scientist;
-        this.organisation = organisation;
+        this.organisation = null;
     }
 
+    public Organiser(Organisation organisation){
+        this.scientist=null;
+        this.organisation=organisation;
+    }
     public Organiser() {
-
     }
 
     public Scientist getScientist() {

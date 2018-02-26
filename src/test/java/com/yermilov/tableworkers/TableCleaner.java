@@ -26,4 +26,50 @@ public class TableCleaner {
             LOGGER.error(e.getMessage());
         }
     }
+    public static void cleanOrganisationTable(){
+        try {
+            TableUtils.dropTable(DAOFactory.getInstance().getOrganisationDAO().getOrganisationDao(),true);
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    public static void cleanOrganiserTable(){
+        try {
+            TableUtils.dropTable(DAOFactory.getInstance().getOrganiserDAO().getOrganiserDao(),true);
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    public static void cleanScientistTable(){
+        try {
+            TableUtils.dropTable(DAOFactory.getInstance().getScientistDAO().getScientistDao(),true);
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+    public static void cleanDomainTable(){
+        try {
+            TableUtils.dropTable(DAOFactory.getInstance().getDomainDAO().getDomainDao(),true);
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    public static void cleanCampaignTable(){
+        try {
+            TableUtils.dropTable(DAOFactory.getInstance().getCampaignDAO().getCampaignDao(),true);
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    public static void cleanDonationTable(){
+        try {
+            TableUtils.dropTable(DAOFactory.getInstance().getDonationDAO().getDonationDao(),true);
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
 }

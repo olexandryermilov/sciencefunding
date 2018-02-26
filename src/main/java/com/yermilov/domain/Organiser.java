@@ -56,8 +56,8 @@ public class Organiser {
         Organiser organiser = (Organiser) o;
 
         if (id != null ? !id.equals(organiser.id) : organiser.id != null) return false;
-        if (scientist != null ? !scientist.equals(organiser.scientist) : organiser.scientist != null) return false;
-        return organisation != null ? organisation.equals(organiser.organisation) : organiser.organisation == null;
+        if (scientist != null ? !scientist.getId().equals(organiser.scientist.getId()) : organiser.scientist != null) return false;
+        return organisation != null ? organisation.getId().equals(organiser.organisation.getId()) : organiser.organisation == null;
     }
 
     @Override

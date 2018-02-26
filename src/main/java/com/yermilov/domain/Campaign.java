@@ -34,6 +34,10 @@ public class Campaign {
         this.isActive=1;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -52,14 +56,6 @@ public class Campaign {
 
     public void setDomain(Domain domain) {
         this.domain = domain;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getNeedToRaise() {
@@ -92,5 +88,47 @@ public class Campaign {
 
     public void setIsActive(Integer isActive) {
         this.isActive = isActive;
+    }
+
+    @Override
+    public String toString() {
+        return "Campaign{" +
+                "id=" + id +
+                ", organiser=" + organiser +
+                ", needToRaise=" + needToRaise +
+                ", name='" + name + '\'' +
+                ", domain=" + domain +
+                ", description='" + description + '\'' +
+                ", isActive=" + isActive +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Campaign campaign = (Campaign) o;
+
+        if (needToRaise != campaign.needToRaise) return false;
+        if (id != null ? !id.equals(campaign.id) : campaign.id != null) return false;
+        if (organiser != null ? !organiser.getId().equals(campaign.organiser.getId()) : campaign.organiser != null) return false;
+        if (name != null ? !name.equals(campaign.name) : campaign.name != null) return false;
+        if (domain != null ? !domain.getId().equals(campaign.domain.getId()) : campaign.domain != null) return false;
+        if (description != null ? !description.equals(campaign.description) : campaign.description != null)
+            return false;
+        return isActive != null ? isActive.equals(campaign.isActive) : campaign.isActive == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (organiser != null ? organiser.hashCode() : 0);
+        result = 31 * result + needToRaise;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (domain != null ? domain.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (isActive != null ? isActive.hashCode() : 0);
+        return result;
     }
 }

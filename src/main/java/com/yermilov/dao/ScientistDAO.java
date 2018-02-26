@@ -47,7 +47,12 @@ public class ScientistDAO {
             QueryBuilder<Scientist, Long> queryBuilder = scientistDao.queryBuilder();
             queryBuilder.where().eq("user_id",userid);
             PreparedQuery<Scientist> preparedQuery = queryBuilder.prepare();
-            return scientistDao.queryForFirst(preparedQuery);
+            Scientist scientist = scientistDao.queryForFirst(preparedQuery);
+            if(scientist==null)return null;
+            DAOFactory.getInstance().getUserDAO().getUserDao().refresh(scientist.getUser());
+            DAOFactory.getInstance().getDomainDAO().getDomainDao().refresh(scientist.getDomain());
+            DAOFactory.getInstance().getOrganisationDAO().getOrganisationDao().refresh(scientist.getOrganisation());
+            return scientist;
         }catch (SQLException e){
             throw new DAOException(e.getMessage());
         }

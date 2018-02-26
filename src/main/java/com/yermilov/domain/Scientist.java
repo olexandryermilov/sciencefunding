@@ -54,4 +54,36 @@ public class Scientist {
     public void setOrganisation(Organisation organisation) {
         this.organisation = organisation;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Scientist scientist = (Scientist) o;
+
+        if (id != null ? !id.equals(scientist.id) : scientist.id != null) return false;
+        if (user != null ? !user.getId().equals(scientist.user.getId()) : scientist.user != null) return false;
+        if (domain != null ? !domain.getId().equals(scientist.domain.getId()) : scientist.domain != null) return false;
+        return organisation != null ? organisation.getId().equals(scientist.organisation.getId()) : scientist.organisation == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (domain != null ? domain.hashCode() : 0);
+        result = 31 * result + (organisation != null ? organisation.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Scientist{" +
+                "id=" + id +
+                ", user=" + user +
+                ", domain=" + domain +
+                ", organisation=" + organisation +
+                '}';
+    }
 }

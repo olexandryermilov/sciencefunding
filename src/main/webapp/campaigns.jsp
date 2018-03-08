@@ -21,7 +21,7 @@
                         <td>${campaign.domain.name}</td>
                         <td>${campaign.needToRaise}</td>
                         <td><form action="controller" method="get">
-                            <input type="hidden" name="command" value="openCampaign" />
+                            <input type="hidden" name="command" value="campaign" />
                             <input type="hidden" name="campaignId" value=${campaign.id} >
                             <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Learn more</button>
                         </form></td>

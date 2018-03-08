@@ -17,9 +17,9 @@ public class ChangeCampaignStateCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ChangeStateService changeStateService = ChangeStateService.getChangeStateService();
         int idToDelete = Integer.parseInt(request.getParameter("campaignid"));
-        LOGGER.info("Trying to delete next user: userid={}",idToDelete);
+        LOGGER.info("Trying to change state of next campaign: userid={}",idToDelete);
         try {
-            changeStateService.deleteCampaign(idToDelete);
+            changeStateService.changeCampaignState(idToDelete);
             LOGGER.info("Successfully changed state");
             request.getRequestDispatcher("controller?command=campaigns&pageNumber=1"/*+request.getParameter("pageNumber")*/).forward(request,response);
         } catch (DAOException e) {

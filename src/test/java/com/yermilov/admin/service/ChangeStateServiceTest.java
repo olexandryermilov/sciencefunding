@@ -29,7 +29,7 @@ public class ChangeStateServiceTest {
         UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
         for(User user : userList){
             int state = user.getIsActive();
-            changeStateService.deleteUser(user.getId());
+            changeStateService.changeUserState(user.getId());
             userDAO.getUserDao().refresh(user);
             assertEquals(1-state, user.getIsActive());
         }

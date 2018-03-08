@@ -1,8 +1,7 @@
 package com.yermilov.command;
 
-import com.yermilov.exception.DAOException;
 import com.yermilov.exception.RegistrationException;
-import com.yermilov.services.RegistrationService;
+import com.yermilov.service.RegistrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class RegistrationCommand implements Command{
     private final static Logger LOGGER = LoggerFactory.getLogger(RegistrationCommand.class);

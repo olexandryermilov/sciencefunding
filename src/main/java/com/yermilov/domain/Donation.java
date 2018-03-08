@@ -75,8 +75,8 @@ public class Donation {
 
         if (value != donation.value) return false;
         if (id != null ? !id.equals(donation.id) : donation.id != null) return false;
-        if (fromUser != null ? !fromUser.equals(donation.fromUser) : donation.fromUser != null) return false;
-        if (toCampaign != null ? !toCampaign.equals(donation.toCampaign) : donation.toCampaign != null) return false;
+        if (fromUser != null ? !fromUser.getId().equals(donation.fromUser.getId()) : donation.fromUser != null) return false;
+        if (toCampaign != null ? !toCampaign.getId().equals(donation.toCampaign.getId()) : donation.toCampaign != null) return false;
         return comment != null ? comment.equals(donation.comment) : donation.comment == null;
     }
 

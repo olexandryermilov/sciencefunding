@@ -29,6 +29,13 @@ public class DomainDAO {
         }
     }
 
+    public Domain queryForId(int domainId) throws DAOException {
+        try {
+            return domainDao.queryForId(domainId);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
     public Dao<Domain, Integer> getDomainDao() {
         return domainDao;
     }

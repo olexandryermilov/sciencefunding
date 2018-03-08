@@ -40,7 +40,7 @@ class CampaignDaoTest extends Specification {
     def 'create_createsRecord'(){
         setup:
             Campaign campaign = new Campaign(organiserList.get(0), 4000, "BestCampaign", domainList.get(0), "Fund us plz")
-            campaign.setId(3)
+            campaign.setId(campaignList.size()+1)
             campaignList.add(campaign)
         when:
             DAOFactory.instance.campaignDAO.create(campaign)
@@ -115,6 +115,26 @@ class CampaignDaoTest extends Specification {
             campaignList.get(1)==DAOFactory.instance.campaignDAO.campaignDao.queryForId(campaignList.get(1).id)
     }
 
+    def 'queryForId_returnsRightCampaigns'(){
+        setup:
+        for(campaign in campaignList){
+            when:
+                Campaign ans = DAOFactory.instance.campaignDAO.queryForId(campaign.id)
+            then:
+                campaign==ans
+        }
+    }
+
+    def 'queryForId_returnsNull_WhenThereIsNoSuchCampaign'(){
+        setup:
+        List<Integer> badIds = new ArrayList<Integer>(){{add(0);add(-1);add(15)}}
+        for(id in badIds){
+            when:
+                Campaign ans = DAOFactory.instance.campaignDAO.queryForId(id)
+            then:
+                null==ans
+        }
+    }
 
     def cleanup(){
         TableCleaner.cleanCampaignTable()

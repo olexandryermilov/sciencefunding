@@ -1,11 +1,9 @@
-package com.yermilov.services;
+package com.yermilov.service;
 
 import com.yermilov.dao.CampaignDAO;
 import com.yermilov.dao.DAOFactory;
 import com.yermilov.dao.IDAOFactory;
-import com.yermilov.dao.UserDAO;
 import com.yermilov.domain.Campaign;
-import com.yermilov.domain.User;
 import com.yermilov.exception.DAOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +32,7 @@ public class CampaignService {
     /**
      *
      * @return Total number of user records in database
-     * @throws DAOException Re-throws DAOException from UserDAO
+     * @throws DAOException Re-throws DAOException from CampaignDAO
      *  UserDAO#findSize()
      */
     public long getTableSize() throws DAOException {
@@ -46,7 +44,7 @@ public class CampaignService {
      *
      * @param from How much records to skip
      * @param limit How much records should be returned
-     * @return List of users to display
+     * @return List of campaigns to display
      * @throws DAOException Re-throws DAOException from CampaignDAO
      * @see CampaignDAO#getLimitedAmountOfCampaigns(int, int)
      */
@@ -55,6 +53,11 @@ public class CampaignService {
         List<Campaign> campaigns=(onlyActive)?campaignDAO.getLimitedAmountOfActiveCampaigns(limit,from)
                                              :campaignDAO.getLimitedAmountOfCampaigns(limit,from);
         return campaigns;
+    }
+
+    public Campaign getCampaign(int campaignId) throws DAOException {
+        CampaignDAO campaignDAO = daoFactory.getCampaignDAO();
+        return campaignDAO.queryForId(campaignId);
     }
 
     public void setDaoFactory(IDAOFactory daoFactory) {

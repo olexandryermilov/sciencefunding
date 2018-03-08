@@ -1,19 +1,14 @@
 package com.yermilov.command;
 
-import com.yermilov.domain.Campaign;
-import com.yermilov.domain.Domain;
 import com.yermilov.domain.User;
 import com.yermilov.exception.DAOException;
-import com.yermilov.exception.LoginException;
-import com.yermilov.services.AddCampaignService;
-import com.yermilov.services.LoginService;
+import com.yermilov.service.AddCampaignService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class AddCampaignCommand implements Command {

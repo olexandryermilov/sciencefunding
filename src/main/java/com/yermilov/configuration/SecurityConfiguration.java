@@ -1,6 +1,5 @@
 package com.yermilov.configuration;
 
-import com.yermilov.command.Command;
 import com.yermilov.command.CommandFactory;
 
 import java.util.HashMap;
@@ -25,6 +24,7 @@ public class SecurityConfiguration {
         grant.put(CommandFactory.ADD_CAMPAIGN,AUTH);
         grant.put(CommandFactory.CAMPAIGNS,AUTH);
         grant.put(CommandFactory.CHANGE_CAMPAIGN_STATE,ADMIN);
+        grant.put(CommandFactory.WATCH_CAMPAIGN,AUTH);
         grant.put("/",ALL);
         grant.put("registration.jsp",ALL);
         grant.put("login.jsp",ALL);

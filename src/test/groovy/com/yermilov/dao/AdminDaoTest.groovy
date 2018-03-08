@@ -28,7 +28,6 @@ class AdminDaoTest extends Specification {
         then:
             adminList==DAOFactory.instance.adminDAO.adminDao.queryForAll()
 
-
     }
 
     def 'queryForEmail_returnsAdminWhenRightEmail'(){

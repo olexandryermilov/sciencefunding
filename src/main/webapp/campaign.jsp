@@ -9,6 +9,13 @@
             <label> <c:out value="${campaign.description}"/></label>
             <label> <c:out value="${moneyRaised}/${campaign.needToRaise}"/></label>
             <label> <c:out value="${campaign.organiser}"/> </label>
+            <c:if test="${campaign.isActive==1}">
+                <form action="controller" method="get">
+                    <input type="hidden" name="command" value="donate"/>
+                    <input type="hidden" name="campaignId" value="${campaign.id}" />
+                    <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Donate</button>
+                </form>
+            </c:if>
         </div>
         <label class="w3-text-red">${errorMessage}</label>
         </form>

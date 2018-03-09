@@ -25,6 +25,7 @@ public class SecurityConfiguration {
         grant.put(CommandFactory.CAMPAIGNS,AUTH);
         grant.put(CommandFactory.CHANGE_CAMPAIGN_STATE,ADMIN);
         grant.put(CommandFactory.WATCH_CAMPAIGN,AUTH);
+        grant.put(CommandFactory.DONATE,AUTH);
         grant.put("/",ALL);
         grant.put("registration.jsp",ALL);
         grant.put("login.jsp",ALL);
@@ -35,7 +36,7 @@ public class SecurityConfiguration {
         grant.put("header.jsp",NO_ACCESS);
         grant.put("main.jsp",NO_ACCESS);
         grant.put(CommandFactory.CAMPAIGNS+".jsp",AUTH);
-
+        grant.put(CommandFactory.DONATE+".jsp",AUTH);
     }
 
     public static SecurityConfiguration getInstance() {

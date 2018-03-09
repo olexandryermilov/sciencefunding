@@ -7,9 +7,9 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Donation {
     @DatabaseField(generatedId=true)
     private Integer id;
-    @DatabaseField(foreign = true, columnName = "from_user")
+    @DatabaseField(foreign = true, columnName = "from_user_id")
     private User fromUser;
-    @DatabaseField(foreign = true, columnName = "to_campaign")
+    @DatabaseField(foreign = true, columnName = "to_campaign_id")
     private Campaign toCampaign;
     @DatabaseField
     private int value;

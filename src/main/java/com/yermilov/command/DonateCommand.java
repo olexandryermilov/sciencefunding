@@ -1,6 +1,5 @@
 package com.yermilov.command;
 
-import com.yermilov.admin.service.ChangeStateService;
 import com.yermilov.domain.User;
 import com.yermilov.exception.DAOException;
 import com.yermilov.service.DonateService;
@@ -20,13 +19,25 @@ public class DonateCommand implements Command {
         DonateService donateService = DonateService.getDonateService();
         long userId = ((User)(request.getSession().getAttribute("currentUser"))).getId();
         int campaignId= Integer.parseInt(request.getParameter("campaignId"));
-        int money = Integer.parseInt(request.getParameter("money"));
+        int money=-1;
+        if(request.getParameter("money")==null){
+            request.getRequestDispatcher("donate.jsp").forward(request,response);
+            return;
+        }
+        try{
+            money = Integer.parseInt(request.getParameter("money"));
+        }
+        catch (NumberFormatException e){
+            request.setAttribute("errorMessage","Please, donate positive amount of money");
+            request.getRequestDispatcher("").forward(request,response);
+            return;
+        }
         if(money<=0){
             request.setAttribute("errorMessage","Please, donate positive amount of money");
             request.getRequestDispatcher("").forward(request,response);
             return;
         }
-        String comment = request.getParameter("comment");
+        String comment = request.getParameter("description");
 
         try {
             if(!TransactionService.getDonateService().verifyTransaction()){
@@ -36,7 +47,7 @@ public class DonateCommand implements Command {
             }
             donateService.donateMoney(userId,campaignId,money,comment);
             LOGGER.info("User {} successfully donated {}$ to campaign {}",userId,money,campaignId);
-            request.getRequestDispatcher("").forward(request,response);
+            request.getRequestDispatcher("controller?command=campaign&campaignId="+String.valueOf(campaignId)).forward(request,response);
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());
         }

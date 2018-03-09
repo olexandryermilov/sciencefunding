@@ -9,6 +9,8 @@ import spock.lang.Shared
 import spock.lang.Specification
 
 import javax.persistence.Table
+import java.util.function.Predicate
+import java.util.function.ToIntFunction
 
 class DonationDaoTest extends Specification {
 
@@ -52,6 +54,21 @@ class DonationDaoTest extends Specification {
             DAOFactory.instance.donationDAO.create(donation)
         then:
             donationList==DAOFactory.instance.donationDAO.donationDao.queryForAll()
+    }
+
+    def 'getMoneyForCampaign_returnsRightAnswer'(){
+        when:
+            int sum = DAOFactory.instance.donationDAO.getMoneyForCampaign(campaignId)
+            for(Donation donation: donationList){
+                if(campaignId==donation.toCampaign.id){
+                    expectedAns+=donation.value
+                }
+            }
+        then:
+            sum==expectedAns
+        where:
+            campaignId<<(1..4)
+            expectedAns = 0
     }
 
     def cleanup(){

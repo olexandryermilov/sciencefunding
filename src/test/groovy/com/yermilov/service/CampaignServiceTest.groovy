@@ -3,6 +3,7 @@ package com.yermilov.service
 import com.yermilov.dao.DAOFactory
 import com.yermilov.domain.Campaign
 import com.yermilov.domain.Domain
+import com.yermilov.domain.Donation
 import com.yermilov.domain.Organisation
 import com.yermilov.domain.Organiser
 import com.yermilov.domain.Scientist
@@ -33,6 +34,8 @@ class CampaignServiceTest extends Specification {
     @Shared
     private List<Campaign> campaignList
 
+    @Shared
+    private List<Donation> donationList
     def setup(){
         DatabaseConnector.getInstance().setORMLiteConnectionSource(H2ConnectionPool.getInstance().getConnectionSource())
         userList = TableCreator.initUserTable()
@@ -41,6 +44,7 @@ class CampaignServiceTest extends Specification {
         scientistList = TableCreator.initScientistTable()
         organiserList = TableCreator.initOrganiserTable()
         campaignList = TableCreator.initCampaignTable()
+        donationList = TableCreator.initDonationTable()
     }
 
     def 'getCampaign_returnsRightCampaigns'(){
@@ -64,6 +68,21 @@ class CampaignServiceTest extends Specification {
         }
     }
 
+    def 'getMoneyForCampaign_returnsRightAnswer'(){
+        when:
+            int sum = CampaignService.campaignService.getRaisedMoneyForCampaign(campaignId)
+            for(Donation donation: donationList){
+                if(campaignId==donation.toCampaign.id){
+                    expectedAns+=donation.value
+                }
+            }
+        then:
+            sum==expectedAns
+        where:
+            campaignId<<(1..4)
+            expectedAns = 0
+    }
+
     def cleanup(){
         TableCleaner.cleanCampaignTable()
         TableCleaner.cleanOrganiserTable()
@@ -71,5 +90,6 @@ class CampaignServiceTest extends Specification {
         TableCleaner.cleanOrganisationTable()
         TableCleaner.cleanDomainTable()
         TableCleaner.cleanUserTable()
+        TableCleaner.cleanDonationTable()
     }
 }

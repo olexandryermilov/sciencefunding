@@ -7,8 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *  Service for changing state of user's activeness
+ *  Service for changing state of user and campign activeness
  *  @see ChangeUserStateCommand
+ *  @see com.yermilov.admin.command.ChangeCampaignStateCommand
  */
 public class ChangeStateService {
     private final static Logger LOGGER = LoggerFactory.getLogger(ChangeStateService.class);
@@ -26,18 +27,23 @@ public class ChangeStateService {
     }
 
     /**
-     * Deletes user and related to him client and driver entities from database
-     * @param idToDelete Id of user that admin tried to delete
-     * @return true if deletes successfully
-     * @throws DAOException Re-throws DAOException from UserDAO, ClientDAO or DriverDAO methods
+     * Changes state of activeness of user
+     * @param idToDelete Id of user
+     * @return true if changes successfully
+     * @throws DAOException Re-throws DAOException from UserDAO
      */
-    public boolean deleteUser(long idToDelete) throws DAOException {
+    public boolean changeUserState(long idToDelete) throws DAOException {
         UserDAO userDAO = daoFactory.getUserDAO();
         userDAO.changeUserState(idToDelete);
         return true;
     }
-
-    public boolean deleteCampaign(int idToDelete) throws DAOException {
+    /**
+     * Changes state of activeness of user
+     * @param idToDelete Id of user
+     * @return true if changes successfully
+     * @throws DAOException Re-throws DAOException from UserDAO
+     */
+    public boolean changeCampaignState(int idToDelete) throws DAOException {
         CampaignDAO campaignDAO = daoFactory.getCampaignDAO();
         campaignDAO.changeCampaignState(idToDelete);
         return true;

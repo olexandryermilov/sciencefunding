@@ -1,10 +1,7 @@
 package com.yermilov.tableworkers;
 
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.table.TableUtils;
 import com.yermilov.dao.DAOFactory;
-import com.yermilov.domain.User;
-import com.yermilov.transaction.DatabaseConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

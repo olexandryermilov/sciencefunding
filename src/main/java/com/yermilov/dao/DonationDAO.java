@@ -2,12 +2,14 @@ package com.yermilov.dao;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.yermilov.domain.*;
 import com.yermilov.exception.DAOException;
 import com.yermilov.transaction.DatabaseConnector;
 
 import java.sql.SQLException;
+import java.util.function.ToIntFunction;
 
 /**
  * Wrapper for dao provided by ORMLite
@@ -33,6 +35,17 @@ public class DonationDAO {
         User user = DAOFactory.getInstance().getUserDAO().queryForId(userId);
         Campaign campaign = DAOFactory.getInstance().getCampaignDAO().queryForId(campaignId);
         return create(new Donation(user, campaign, money, comment));
+    }
+
+    public int getMoneyForCampaign(int campaignId) throws DAOException {
+        try {
+            //PreparedQuery<Donation> pq = donationDao.queryBuilder();
+            //System.out.println(donationDao.query(pq));
+            return donationDao.queryForAll().stream().mapToInt(value -> (value.getToCampaign().getId()==campaignId)?value.getValue():0).sum();
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+
     }
 
     public Dao<Donation, Integer> getDonationDao() {

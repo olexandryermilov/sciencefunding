@@ -2,6 +2,7 @@ package com.yermilov.service;
 
 import com.yermilov.dao.CampaignDAO;
 import com.yermilov.dao.DAOFactory;
+import com.yermilov.dao.DonationDAO;
 import com.yermilov.dao.IDAOFactory;
 import com.yermilov.domain.Campaign;
 import com.yermilov.exception.DAOException;
@@ -60,6 +61,10 @@ public class CampaignService {
         return campaignDAO.queryForId(campaignId);
     }
 
+    public int getRaisedMoneyForCampaign(int campaignId) throws DAOException{
+        DonationDAO donationDAO = daoFactory.getDonationDAO();
+        return donationDAO.getMoneyForCampaign(campaignId);
+    }
     public void setDaoFactory(IDAOFactory daoFactory) {
         this.daoFactory = daoFactory;
     }

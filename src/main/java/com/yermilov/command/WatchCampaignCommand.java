@@ -22,7 +22,7 @@ public class WatchCampaignCommand implements Command {
         CampaignService campaignService = CampaignService.getCampaignService();
         try {
             Campaign campaign = campaignService.getCampaign(id);
-            int moneyRaised = 0;
+            int moneyRaised = campaignService.getRaisedMoneyForCampaign(id);
             request.setAttribute("campaign",campaign);
             request.setAttribute("moneyRaised",moneyRaised);
             request.getRequestDispatcher("campaign.jsp").forward(request, response);

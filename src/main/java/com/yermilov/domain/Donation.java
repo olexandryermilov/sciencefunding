@@ -100,4 +100,7 @@ public class Donation {
                 ", comment='" + comment + '\'' +
                 '}';
     }
+    Donation plus(Donation other) {
+        return new Donation(fromUser,toCampaign,value+other.value,comment);
+    }
 }

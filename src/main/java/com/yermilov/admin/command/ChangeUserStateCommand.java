@@ -19,7 +19,7 @@ public class ChangeUserStateCommand implements Command {
         long idToDelete = Long.parseLong(request.getParameter("userid"));
         LOGGER.info("Trying to delete next user: userid={}",idToDelete);
         try {
-            changeStateService.deleteUser(idToDelete);
+            changeStateService.changeUserState(idToDelete);
             LOGGER.info("Successfully changed state");
             request.getRequestDispatcher("controller?command=users&pageNumber=1"/*+request.getParameter("pageNumber")*/).forward(request,response);
         } catch (DAOException e) {

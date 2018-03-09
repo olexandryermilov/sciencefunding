@@ -160,6 +160,11 @@ public class TableCreator {
             TableUtils.createTableIfNotExists(DatabaseConnector.getInstance().getORMLiteConnectionSource(),Donation.class);
             donations= new ArrayList<>();
             Dao<Donation, Integer> donationDAO = DAOFactory.getInstance().getDonationDAO().getDonationDao();
+            donations.add(new Donation(users.get(0),campaigns.get(0),100, "Thanks"));
+            donations.add(new Donation(users.get(1),campaigns.get(0),150, "Thanks"));
+            donations.add(new Donation(users.get(1),campaigns.get(1),100, "Thanks"));
+            donations.add(new Donation(users.get(2),campaigns.get(1),1000, "Thanks"));
+            donations.add(new Donation(users.get(2),campaigns.get(0),13, "Thanks"));
             for(Donation donation : donations){
                 donationDAO.create(donation);
                 donationDAO.refresh(donation);

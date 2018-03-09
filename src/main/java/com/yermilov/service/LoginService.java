@@ -1,9 +1,5 @@
-package com.yermilov.services;
+package com.yermilov.service;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.Where;
 import com.yermilov.dao.DAOFactory;
 import com.yermilov.dao.IDAOFactory;
 import com.yermilov.dao.UserDAO;
@@ -12,8 +8,6 @@ import com.yermilov.exception.DAOException;
 import com.yermilov.exception.LoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.SQLException;
 
 /**
  * Service for authorization

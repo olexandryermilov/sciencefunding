@@ -6,7 +6,6 @@ import com.yermilov.dao.UserDAO;
 import com.yermilov.domain.User;
 import com.yermilov.exception.DAOException;
 import com.yermilov.exception.LoginException;
-import com.yermilov.services.LoginService;
 import com.yermilov.tableworkers.TableCleaner;
 import com.yermilov.tableworkers.TableCreator;
 import com.yermilov.transaction.DatabaseConnector;

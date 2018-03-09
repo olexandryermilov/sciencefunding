@@ -7,9 +7,9 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Donation {
     @DatabaseField(generatedId=true)
     private Integer id;
-    @DatabaseField(foreign = true, columnName = "from_user")
+    @DatabaseField(foreign = true, columnName = "from_user_id")
     private User fromUser;
-    @DatabaseField(foreign = true, columnName = "to_campaign")
+    @DatabaseField(foreign = true, columnName = "to_campaign_id")
     private Campaign toCampaign;
     @DatabaseField
     private int value;
@@ -75,8 +75,8 @@ public class Donation {
 
         if (value != donation.value) return false;
         if (id != null ? !id.equals(donation.id) : donation.id != null) return false;
-        if (fromUser != null ? !fromUser.equals(donation.fromUser) : donation.fromUser != null) return false;
-        if (toCampaign != null ? !toCampaign.equals(donation.toCampaign) : donation.toCampaign != null) return false;
+        if (fromUser != null ? !fromUser.getId().equals(donation.fromUser.getId()) : donation.fromUser != null) return false;
+        if (toCampaign != null ? !toCampaign.getId().equals(donation.toCampaign.getId()) : donation.toCampaign != null) return false;
         return comment != null ? comment.equals(donation.comment) : donation.comment == null;
     }
 
@@ -99,5 +99,8 @@ public class Donation {
                 ", value=" + value +
                 ", comment='" + comment + '\'' +
                 '}';
+    }
+    Donation plus(Donation other) {
+        return new Donation(fromUser,toCampaign,value+other.value,comment);
     }
 }

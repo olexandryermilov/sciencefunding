@@ -2,7 +2,7 @@ package com.yermilov.command;
 
 import com.yermilov.domain.Campaign;
 import com.yermilov.exception.DAOException;
-import com.yermilov.services.CampaignService;
+import com.yermilov.service.CampaignService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

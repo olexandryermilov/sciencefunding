@@ -1,11 +1,9 @@
-package com.yermilov.services;
+package com.yermilov.service;
 
 import com.yermilov.dao.CampaignDAO;
 import com.yermilov.dao.DAOFactory;
 import com.yermilov.dao.IDAOFactory;
-import com.yermilov.dao.UserDAO;
 import com.yermilov.domain.*;
-import com.yermilov.exception.AddScientistException;
 import com.yermilov.exception.DAOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

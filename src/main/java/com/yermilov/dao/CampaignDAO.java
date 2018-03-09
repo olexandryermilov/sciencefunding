@@ -40,7 +40,8 @@ public class CampaignDAO {
             Dao<Organiser, Integer> organiserDao = DAOFactory.getInstance().getOrganiserDAO().getOrganiserDao();
             QueryBuilder<Organiser,Integer> organiserQueryBuilder = organiserDao.queryBuilder();
             Organiser organiser = organiserQueryBuilder.join(scientistQueryBuilder).queryForFirst();
-            return create(new Campaign(organiser,needToRaise,name,new Domain(),description));
+            Domain domain = DAOFactory.getInstance().getDomainDAO().queryForId(domainId);
+            return create(new Campaign(organiser,needToRaise,name,domain,description));
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());
         }
@@ -85,6 +86,14 @@ public class CampaignDAO {
             updateBuilder.update();
             return 1;
         } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
+
+    public Campaign queryForId(int campaignId) throws DAOException {
+        try{
+            return campaignDao.queryForId(campaignId);
+        }catch (SQLException e){
             throw new DAOException(e.getMessage());
         }
     }

@@ -9,6 +9,8 @@ import com.yermilov.exception.RegistrationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.regex.Pattern;
+
 /**
  * Service for authorization
  * @see com.yermilov.command.LoginCommand
@@ -40,6 +42,9 @@ public class RegistrationService {
     public void register(String email, String password, String name, String surname) throws RegistrationException {
         UserDAO userDAO = daoFactory.getUserDAO();
         User user = null;
+        if(!isCorrectEmail(email)){
+            throw new RegistrationException("Wrong email");
+        }
         try {
             user = userDAO.queryForEmail(email);
             if(user!=null){
@@ -53,6 +58,11 @@ public class RegistrationService {
         }
 
     }
+
+    public boolean isCorrectEmail(String email){
+        return email.matches("\\w(\\w|.)*@(\\w|.)+.(\\w)+")&&email.split("@").length==2;
+    }
+
     public void setDaoFactory(IDAOFactory daoFactory){
         this.daoFactory=daoFactory;
     }

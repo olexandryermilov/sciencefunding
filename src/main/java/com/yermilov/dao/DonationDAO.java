@@ -39,9 +39,9 @@ public class DonationDAO {
 
     public int getMoneyForCampaign(int campaignId) throws DAOException {
         try {
-            //PreparedQuery<Donation> pq = donationDao.queryBuilder();
+            PreparedQuery<Donation> pq = donationDao.queryBuilder().where().eq("to_campaign_id",campaignId).prepare();
             //System.out.println(donationDao.query(pq));
-            return donationDao.queryForAll().stream().mapToInt(value -> (value.getToCampaign().getId()==campaignId)?value.getValue():0).sum();
+            return donationDao.query(pq).stream().mapToInt(Donation::getValue).sum();
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());
         }

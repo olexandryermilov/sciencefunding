@@ -20,6 +20,7 @@ public class CommandFactory {
     public final static String CHANGE_CAMPAIGN_STATE = "changeCampaignState";
     public final static String WATCH_CAMPAIGN = "campaign";
     public final static String DONATE = "donate";
+    public final static String DONATIONS = "donations";
     private Map<String,Command> commandMap = new HashMap<>();
     private CommandFactory(){
         commandMap.put(LOGIN,new com.yermilov.command.LoginCommand());
@@ -35,6 +36,7 @@ public class CommandFactory {
         commandMap.put(CHANGE_CAMPAIGN_STATE, new ChangeCampaignStateCommand());
         commandMap.put(WATCH_CAMPAIGN,new WatchCampaignCommand());
         commandMap.put(DONATE,new DonateCommand());
+        commandMap.put(DONATIONS,new DonationsCommand());
     }
     public static CommandFactory getInstance() {
         return factory;

@@ -15,7 +15,12 @@ Hi, <c:out value="${admin.email}"/> !
         Watch campaigns list
     </button>
 </form>
-
+<form action="controller" method="GET">
+    <input type="hidden" name="command" value="donations"/>
+    <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">
+        Watch donations list
+    </button>
+</form>
 <form name="logoutForm" method="POST" action="controller" class="w3-right-align" >
         <input type="hidden" name="command" value="adminLogout" />
         <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-top">Log out</button>

@@ -56,7 +56,6 @@ class CampaignsCommandTestSpock extends Specification {
             RequestDispatcher requestDispatcher = Mock(RequestDispatcher.class)
             httpServletRequest.getRequestDispatcher(CommandFactory.CAMPAIGNS+".jsp")>>requestDispatcher
             Command campaignsCommand = CommandFactory.getInstance().getCommand(CommandFactory.CAMPAIGNS)
-            List<Campaign> campaigns = campaignList.subList(0,2)
         when:
             campaignsCommand.execute(httpServletRequest,httpServletResponse)
         then:

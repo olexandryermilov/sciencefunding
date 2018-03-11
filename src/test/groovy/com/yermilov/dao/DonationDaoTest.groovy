@@ -57,13 +57,13 @@ class DonationDaoTest extends Specification {
     }
     def 'createSecond_createsRecord'(){
         setup:
-        Donation donation = new Donation(userList.get(0),campaignList.get(0),100, "From our table to yours")
-        donationList<<donation
-        donation.id=donationList.size()
+            Donation donation = new Donation(userList.get(0),campaignList.get(0),100, "From our table to yours")
+            donationList<<donation
+            donation.id=donationList.size()
         when:
-        DAOFactory.instance.donationDAO.create(userList.get(0).id,campaignList.get(0).id,100, "From our table to yours")
+            DAOFactory.instance.donationDAO.create(userList.get(0).id,campaignList.get(0).id,100, "From our table to yours")
         then:
-        donationList==DAOFactory.instance.donationDAO.donationDao.queryForAll()
+            donationList==DAOFactory.instance.donationDAO.donationDao.queryForAll()
     }
 
     def 'getMoneyForCampaign_returnsRightAnswer'(){

@@ -40,6 +40,10 @@ public class DonationService {
         return DAOFactory.getInstance().getDonationDAO().getSize();
     }
 
+    public long getTableSize(long userId) throws DAOException{
+        return DAOFactory.getInstance().getDonationDAO().getSize(userId);
+    }
+
     /**
      *
      * @param from How much records to skip
@@ -52,6 +56,11 @@ public class DonationService {
         DonationDAO donationDAO = daoFactory.getDonationDAO();
         List<Donation> donations=donationDAO.getLimitedAmountOfDonations(limit,from);
         return donations;
+    }
+
+    public List<Donation> getDonations(int from, int limit, long userId) throws DAOException{
+        DonationDAO donationDAO = daoFactory.getDonationDAO();
+        return donationDAO.getLimitedAmountOfDonations(limit,from,userId);
     }
 
     public void setDaoFactory(IDAOFactory daoFactory) {

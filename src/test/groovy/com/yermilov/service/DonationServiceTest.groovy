@@ -1,5 +1,7 @@
-package com.yermilov.dao
+package com.yermilov.service
 
+import com.yermilov.admin.service.DonationService
+import com.yermilov.dao.DAOFactory
 import com.yermilov.domain.*
 import com.yermilov.tableworkers.TableCleaner
 import com.yermilov.tableworkers.TableCreator
@@ -8,12 +10,7 @@ import com.yermilov.transaction.H2ConnectionPool
 import spock.lang.Shared
 import spock.lang.Specification
 
-import javax.persistence.Table
-import java.util.function.Predicate
-import java.util.function.ToIntFunction
-
-class DonationDaoTest extends Specification {
-
+class DonationServiceTest extends Specification {
     @Shared
     private List<Organiser> organiserList
 
@@ -34,7 +31,6 @@ class DonationDaoTest extends Specification {
 
     @Shared
     private List<Donation> donationList
-
     def setup(){
         DatabaseConnector.getInstance().setORMLiteConnectionSource(H2ConnectionPool.getInstance().getConnectionSource())
         userList = TableCreator.initUserTable()
@@ -45,89 +41,53 @@ class DonationDaoTest extends Specification {
         campaignList = TableCreator.initCampaignTable()
         donationList = TableCreator.initDonationTable()
     }
-    def 'create_createsRecord'(){
-        setup:
-            Donation donation = new Donation(userList.get(0),campaignList.get(0),100, "From our table to yours")
-            donationList<<donation
-            donation.id=donationList.size()
-        when:
-            DAOFactory.instance.donationDAO.create(donation)
-        then:
-            donationList==DAOFactory.instance.donationDAO.donationDao.queryForAll()
-    }
-    def 'createSecond_createsRecord'(){
-        setup:
-        Donation donation = new Donation(userList.get(0),campaignList.get(0),100, "From our table to yours")
-        donationList<<donation
-        donation.id=donationList.size()
-        when:
-        DAOFactory.instance.donationDAO.create(userList.get(0).id,campaignList.get(0).id,100, "From our table to yours")
-        then:
-        donationList==DAOFactory.instance.donationDAO.donationDao.queryForAll()
-    }
 
-    def 'getMoneyForCampaign_returnsRightAnswer'(){
-        when:
-            int sum = DAOFactory.instance.donationDAO.getMoneyForCampaign(campaignId)
-            for(Donation donation: donationList){
-                if(campaignId==donation.toCampaign.id){
-                    expectedAns+=donation.value
-                }
-            }
-        then:
-            sum==expectedAns
-        where:
-            campaignId<<(1..4)
-            expectedAns = 0
-    }
-
-    def 'getSize_returnsRightSize'(){
+    def 'getTableSize_returnsRightSize'(){
         setup:
             int RIGHT_ANS =donationList.size()
         when:
-            int size = DAOFactory.instance.donationDAO.getSize()
+            int size = DonationService.donationService.getTableSize()
         then:
             RIGHT_ANS==size
     }
 
-    def 'getSize_ReturnsRightSize_AfterCreatingNewDonation'(){
+    def 'getTableSize_ReturnsRightSize_AfterCreatingNewDonation'(){
         setup:
             Donation donation = new Donation(userList.get(0),campaignList.get(0),400,"TY")
             donationList.add(donation)
             DAOFactory.instance.donationDAO.create(donation)
         when:
-            int size = DAOFactory.instance.donationDAO.getSize()
+            int size = DonationService.donationService.getTableSize()
         then:
             donationList.size()==size
     }
 
-    def 'getSize_ReturnsRightSize_AfterDeletingDonation'(){
+    def 'getTableSize_ReturnsRightSize_AfterDeletingDonation'(){
         setup:
             DAOFactory.instance.donationDAO.donationDao.delete(donationList.get(0))
             donationList.remove(donationList.get(0))
         when:
-            int size = DAOFactory.instance.donationDAO.getSize()
+            int size = DonationService.donationService.getTableSize()
         then:
             donationList.size()==size
     }
 
     def 'getLimitedAmountOfDonations_returnsRightAmount'(){
         setup:
-            List<Donation> list = donationList.subList(1,3)
+            List<Donation> list = donationList.subList(1,2)
         when:
-            List<Donation> ans = DAOFactory.instance.donationDAO.getLimitedAmountOfDonations(2,1)
+            List<Donation> ans = DonationService.donationService.getDonations(1,1)
         then:
             list==ans
     }
 
-
     def cleanup(){
-        TableCleaner.cleanDonationTable()
         TableCleaner.cleanCampaignTable()
         TableCleaner.cleanOrganiserTable()
         TableCleaner.cleanScientistTable()
         TableCleaner.cleanOrganisationTable()
         TableCleaner.cleanDomainTable()
         TableCleaner.cleanUserTable()
+        TableCleaner.cleanDonationTable()
     }
 }

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *  Service for changing state of user and campign activeness
+ *  Service for changing state of user and campaign activeness
  *  @see ChangeUserStateCommand
  *  @see com.yermilov.admin.command.ChangeCampaignStateCommand
  */

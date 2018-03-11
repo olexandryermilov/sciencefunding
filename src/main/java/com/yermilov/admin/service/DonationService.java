@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Service for getting specific amount of donations to display it
- * @see DonationsCommand
+ * @see com.yermilov.admin.command.DonationsCommand
  */
 public class DonationService {
     private final static Logger LOGGER = LoggerFactory.getLogger(DonationService.class);

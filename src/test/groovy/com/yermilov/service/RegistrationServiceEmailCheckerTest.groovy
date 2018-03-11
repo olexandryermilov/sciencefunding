@@ -7,6 +7,7 @@ import com.yermilov.transaction.DatabaseConnector
 import com.yermilov.transaction.H2ConnectionPool
 import spock.lang.Shared
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class RegistrationServiceEmailCheckerTest extends Specification {
 
@@ -18,19 +19,20 @@ class RegistrationServiceEmailCheckerTest extends Specification {
         DatabaseConnector.getInstance().setORMLiteConnectionSource(H2ConnectionPool.getInstance().getConnectionSource())
     }
 
+    @Unroll
     def 'isEmailCorrect'(){
         when:
             boolean isCorrect = RegistrationService.registrationService.isCorrectEmail(email)
         then:
             isCorrect == expectedAnswer
         where:
-            email                                      | expectedAnswer
-            "olexandr.yermilov@gmail.com"              | true
-            "abc@gmail."                               | false
-            "olex@@gmail.com"                          | false
-            "test.test@subdomain.subdomain.domain.com" | true
-            "email@gmail.com"                          | true
-            "o@lex@gmail.com"                          | false
+            email                                      || expectedAnswer
+            "olexandr.yermilov@gmail.com"              || true
+            "abc@gmail."                               || false
+            "olex@@gmail.com"                          || false
+            "test.test@subdomain.subdomain.domain.com" || true
+            "email@gmail.com"                          || true
+            "o@lex@gmail.com"                          || false
 
     }
 }

@@ -24,6 +24,7 @@ jacoco {
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 jacocoTestReport {
 	reports {
@@ -53,6 +54,9 @@ dependencies {
 	compile ('org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final')
 	compile 'org.codehaus.groovy:groovy-all:2.4.10'
 	testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
+	testCompile( 'com.athaydes:spock-reports:1.4.0' ) {
+		transitive = false
+	}
 	def tomcatVersion = '9.0.1'
 	tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
 			"org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6",

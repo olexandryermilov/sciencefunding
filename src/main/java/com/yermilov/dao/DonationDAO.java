@@ -55,7 +55,16 @@ public class DonationDAO {
             throw new DAOException(e.getMessage());
         }
     }
-
+    public long getSize(long userId) throws DAOException{
+        try {
+            QueryBuilder<Donation, Integer> queryBuilder = donationDao.queryBuilder();
+            queryBuilder.setCountOf(true);
+            PreparedQuery<Donation> preparedQuery =queryBuilder.where().eq("from_user_id",userId).prepare();
+            return donationDao.countOf(preparedQuery);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
     public List<Donation> getLimitedAmountOfDonations(int limit, int skip) throws DAOException {
         try {
             QueryBuilder<Donation, Integer> queryBuilder = donationDao.queryBuilder();
@@ -76,7 +85,24 @@ public class DonationDAO {
         }
     }
 
-
+    public List<Donation> getLimitedAmountOfDonations(int limit, int skip,long userId) throws DAOException {
+        try {
+            QueryBuilder<Donation, Integer> queryBuilder = donationDao.queryBuilder();
+            PreparedQuery<Donation> preparedQuery =queryBuilder.limit((long) limit).offset((long) (skip)).
+                    where().eq("from_user_id",userId).prepare();
+            List<Donation> donations =donationDao.query(preparedQuery);
+            donations.forEach(donation -> {
+                try {
+                    DAOFactory.getInstance().getUserDAO().getUserDao().refresh(donation.getFromUser());
+                    DAOFactory.getInstance().getCampaignDAO().getCampaignDao().refresh(donation.getToCampaign());
+                } catch (SQLException ignored) {
+                }
+            });
+            return donations;
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
 
     public Dao<Donation, Integer> getDonationDao() {
         return donationDao;

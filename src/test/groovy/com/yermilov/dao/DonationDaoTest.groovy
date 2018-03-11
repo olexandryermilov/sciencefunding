@@ -119,8 +119,31 @@ class DonationDaoTest extends Specification {
         then:
             list==ans
     }
+    def 'getLimitedAmountOfDonations_returnsRightAmount_WithUserIdSpecified'(){
+        setup:
+            List<Donation> list = donationList.stream().filter({ (it.fromUser.id == userList.get(1).id) })
+                    .collect().toList()
+        when:
+            List<Donation> ans = DAOFactory.instance.donationDAO.getLimitedAmountOfDonations(2,0,userList.get(1).id)
+        then:
+            list==ans
+    }
 
+    def 'getSize_returnsRightSize_WithUserIdSpecified'(){
+        when:
+            int size = DAOFactory.instance.donationDAO.getSize(userId)
+            for(Donation donation: donationList){
+                if(userId==donation.fromUser.id){
+                    expectedAns++
+            }
+        }
+        then:
+            expectedAns==size
+        where:
+            userId <<(1..userList.size())
+            expectedAns=0
 
+    }
     def cleanup(){
         TableCleaner.cleanDonationTable()
         TableCleaner.cleanCampaignTable()

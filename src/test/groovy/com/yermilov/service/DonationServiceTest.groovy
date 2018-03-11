@@ -81,6 +81,32 @@ class DonationServiceTest extends Specification {
             list==ans
     }
 
+    def 'getDonations_returnsRightAmount_WithUserIdSpecified'(){
+        setup:
+            List<Donation> list = donationList.stream().filter({ (it.fromUser.id == userList.get(1).id) })
+                .collect().toList()
+        when:
+            List<Donation> ans = DonationService.donationService.getDonations(0,2,userList.get(1).id)
+        then:
+            list==ans
+    }
+
+    def 'getTableSize_returnsRightSize_WithUserIdSpecified'(){
+        when:
+            int size = DonationService.donationService.getTableSize(userId)
+            for(Donation donation: donationList){
+            if(userId==donation.fromUser.id){
+                expectedAns++
+            }
+        }
+        then:
+            expectedAns==size
+        where:
+            userId <<(1..userList.size())
+            expectedAns=0
+
+    }
+
     def cleanup(){
         TableCleaner.cleanCampaignTable()
         TableCleaner.cleanOrganiserTable()

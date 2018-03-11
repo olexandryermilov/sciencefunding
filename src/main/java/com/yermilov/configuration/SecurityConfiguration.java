@@ -1,5 +1,6 @@
 package com.yermilov.configuration;
 
+import com.yermilov.command.Command;
 import com.yermilov.command.CommandFactory;
 
 import java.util.HashMap;
@@ -39,6 +40,8 @@ public class SecurityConfiguration {
         grant.put(CommandFactory.DONATE+".jsp",AUTH);
         grant.put(CommandFactory.DONATIONS, ADMIN);
         grant.put(CommandFactory.DONATIONS+".jsp",ADMIN);
+        grant.put(CommandFactory.USERS_DONATIONS,AUTH);
+        grant.put("my_donations.jsp",AUTH);
     }
 
     public static SecurityConfiguration getInstance() {

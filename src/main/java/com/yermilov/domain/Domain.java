@@ -44,7 +44,7 @@ public class Domain {
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + name.hashCode();
+        result = 31 * result +  (name != null ? name.hashCode() : 0);
         return result;
     }
 

@@ -59,7 +59,16 @@ public class CampaignDAO {
             QueryBuilder<Campaign, Integer> queryBuilder = campaignDao.queryBuilder();
             PreparedQuery<Campaign> preparedQuery =queryBuilder.
                     limit((long) limit).offset((long) (skip)).where().eq(Campaign.IS_ACTIVE_FIELD_NAME,1).prepare();
-            return campaignDao.query(preparedQuery);
+            List<Campaign> campaigns =campaignDao.query(preparedQuery);
+            campaigns.forEach(campaign -> {
+                try {
+                    DAOFactory.getInstance().getDomainDAO().getDomainDao().refresh(campaign.getDomain());
+                    DAOFactory.getInstance().getOrganiserDAO().getOrganiserDao().refresh(campaign.getOrganiser());
+                } catch (SQLException e) {
+
+                }
+            });
+            return campaigns;
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());
         }
@@ -69,7 +78,16 @@ public class CampaignDAO {
             QueryBuilder<Campaign, Integer> queryBuilder = campaignDao.queryBuilder();
             PreparedQuery<Campaign> preparedQuery =queryBuilder.
                     limit((long) limit).offset((long) (skip)).prepare();
-            return campaignDao.query(preparedQuery);
+            List<Campaign> campaigns =campaignDao.query(preparedQuery);
+            campaigns.forEach(campaign -> {
+                try {
+                    DAOFactory.getInstance().getDomainDAO().getDomainDao().refresh(campaign.getDomain());
+                    DAOFactory.getInstance().getOrganiserDAO().getOrganiserDao().refresh(campaign.getOrganiser());
+                } catch (SQLException e) {
+
+                }
+            });
+            return campaigns;
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());
         }

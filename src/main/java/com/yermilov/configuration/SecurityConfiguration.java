@@ -37,6 +37,8 @@ public class SecurityConfiguration {
         grant.put("main.jsp",NO_ACCESS);
         grant.put(CommandFactory.CAMPAIGNS+".jsp",AUTH);
         grant.put(CommandFactory.DONATE+".jsp",AUTH);
+        grant.put(CommandFactory.DONATIONS, ADMIN);
+        grant.put(CommandFactory.DONATIONS+".jsp",ADMIN);
     }
 
     public static SecurityConfiguration getInstance() {

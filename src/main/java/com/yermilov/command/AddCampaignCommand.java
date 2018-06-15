@@ -14,7 +14,7 @@ import java.io.IOException;
 public class AddCampaignCommand implements Command {
     private final static Logger LOGGER = LoggerFactory.getLogger(AddCampaignCommand.class);
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String needToRaiseString = request.getParameter("needToRaise");
         String name = request.getParameter("name");
         String description = request.getParameter("description");
@@ -22,8 +22,8 @@ public class AddCampaignCommand implements Command {
         if (needToRaiseString == null||name==null||description==null||domainIdString==null) {
             request.setAttribute("errorMessageLogin","You should fill all fields");
             LOGGER.info("Empty fields");
-            request.getRequestDispatcher(CommandFactory.ADD_CAMPAIGN+".jsp").forward(request, response);
-            return;
+            //request.getRequestDispatcher(CommandFactory.ADD_CAMPAIGN+".jsp").forward(request, response);
+            return CommandFactory.ADD_CAMPAIGN;
         }
         int domainId=-1;
         int needToRaise=-1;
@@ -34,15 +34,17 @@ public class AddCampaignCommand implements Command {
         catch (NumberFormatException e){
             LOGGER.error(e.getMessage());
             request.setAttribute("errorMessageLogin","Numbers should be numbers");
-            request.getRequestDispatcher(CommandFactory.ADD_CAMPAIGN+".jsp").forward(request, response);
-            return;
+            //request.getRequestDispatcher(CommandFactory.ADD_CAMPAIGN+".jsp").forward(request, response);
+            return CommandFactory.ADD_CAMPAIGN;
         }
         AddCampaignService addCampaignService = AddCampaignService.getAddCampaignService();
         try {
             addCampaignService.addCampaign((User) request.getSession().getAttribute("currentUser"),needToRaise,name,domainId,description);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            //request.getRequestDispatcher("index.jsp").forward(request, response);
+            return "index";
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());
+            return "error";
         }
     }
     @Override

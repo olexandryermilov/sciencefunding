@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="styles/w3.css" />
+    <title>Sciencefunding</title>
+</head>
+<body>
+<div th:replace="fragments/top :: header"></div>
+<div class="w3-card-4">
+    <div class="w3-container ">
+        <form name="loginForm" method="POST">
+            <input type="hidden" name="command" value="addCampaign" />
+            <div class="w3-text-black">Need to raise<br/></div>
+            <input type="text" name="needToRaiseS" value="" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"/>
+            <br/>Description<br/>
+            <input type="text" name="description" value="" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"/>
+            <br/>
+            Domain<br/>
+            <input type="text" name="domainidS" value="" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"/>
+            <br/>
+            Name<br/>
+            <input type="text" name="name" value="" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"/>
+            <br/>
+            <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Add campaign</button>
+            <label class="w3-text-red" th:text= "${errorMessageLogin}"> <br/></label>
+        </form>
+    </div>
+</div>
+<div th:replace="fragments/backtomain :: backtomain">
+</div>
+</body>
+</html>

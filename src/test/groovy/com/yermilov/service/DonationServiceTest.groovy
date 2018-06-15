@@ -1,6 +1,6 @@
 package com.yermilov.service
 
-import com.yermilov.admin.service.DonationService
+import com.yermilov.admin.service.dao.DonationService
 import com.yermilov.dao.DAOFactory
 import com.yermilov.domain.*
 import com.yermilov.tableworkers.TableCleaner
@@ -79,6 +79,32 @@ class DonationServiceTest extends Specification {
             List<Donation> ans = DonationService.donationService.getDonations(1,1)
         then:
             list==ans
+    }
+
+    def 'getDonations_returnsRightAmount_WithUserIdSpecified'(){
+        setup:
+            List<Donation> list = donationList.stream().filter({ (it.fromUser.id == userList.get(1).id) })
+                .collect().toList()
+        when:
+            List<Donation> ans = DonationService.donationService.getDonations(0,2,userList.get(1).id)
+        then:
+            list==ans
+    }
+
+    def 'getTableSize_returnsRightSize_WithUserIdSpecified'(){
+        when:
+            int size = DonationService.donationService.getTableSize(userId)
+            for(Donation donation: donationList){
+            if(userId==donation.fromUser.id){
+                expectedAns++
+            }
+        }
+        then:
+            expectedAns==size
+        where:
+            userId <<(1..userList.size())
+            expectedAns=0
+
     }
 
     def cleanup(){

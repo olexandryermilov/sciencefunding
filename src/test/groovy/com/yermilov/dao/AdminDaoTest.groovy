@@ -5,9 +5,11 @@ import com.yermilov.tableworkers.TableCleaner
 import com.yermilov.tableworkers.TableCreator
 import com.yermilov.transaction.DatabaseConnector
 import com.yermilov.transaction.H2ConnectionPool
+import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Shared
 import spock.lang.Specification
 
+@SpringBootTest
 class AdminDaoTest extends Specification {
 
     @Shared
@@ -41,11 +43,11 @@ class AdminDaoTest extends Specification {
     }
     def 'queryForEmail_returnsNull_WhenBadEmail'(){
         setup:
-        final String EMAIL = adminList.get(0).email+'o'
+            final String EMAIL = adminList.get(0).email+'o'
         when:
-        Admin admin = DAOFactory.instance.adminDAO.queryForEmail(EMAIL)
+            Admin admin = DAOFactory.instance.adminDAO.queryForEmail(EMAIL)
         then:
-        admin==null
+            admin==null
     }
     def cleanup(){
         TableCleaner.cleanAdminTable()

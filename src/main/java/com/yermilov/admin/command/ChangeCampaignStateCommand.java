@@ -1,6 +1,6 @@
 package com.yermilov.admin.command;
 
-import com.yermilov.admin.service.ChangeStateService;
+import com.yermilov.admin.service.dao.ChangeStateService;
 import com.yermilov.command.Command;
 import com.yermilov.exception.DAOException;
 import org.slf4j.Logger;
@@ -14,16 +14,18 @@ import java.io.IOException;
 public class ChangeCampaignStateCommand implements Command {
     private final static Logger LOGGER = LoggerFactory.getLogger(ChangeCampaignStateCommand.class);
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ChangeStateService changeStateService = ChangeStateService.getChangeStateService();
         int idToDelete = Integer.parseInt(request.getParameter("campaignid"));
         LOGGER.info("Trying to change state of next campaign: userid={}",idToDelete);
         try {
             changeStateService.changeCampaignState(idToDelete);
             LOGGER.info("Successfully changed state");
-            request.getRequestDispatcher("controller?command=campaigns&pageNumber=1"/*+request.getParameter("pageNumber")*/).forward(request,response);
+            //request.getRequestDispatcher("controller?command=campaigns&pageNumber=1"/*+request.getParameter("pageNumber")*/).forward(request,response);
+            return "controller?command=campaigns&pageNumber=1";
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());
+            return "error";
         }
     }
     @Override

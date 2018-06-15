@@ -70,10 +70,6 @@ public class Organiser {
 
     @Override
     public String toString() {
-        return "Organiser{" +
-                "id=" + id +
-                ", scientist=" + scientist +
-                ", organisation=" + organisation +
-                '}';
+        return (scientist==null)?((organisation!=null)?organisation.getName():"KNU"):scientist.getUser().getName();
     }
 }

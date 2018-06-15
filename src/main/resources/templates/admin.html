@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <title>Sciencefunding</title>
+</head>
+<body>
+<div th:replace="fragments/top :: header"></div>
+
+<label th:if="${justRegistered!=null}" class="w3-text">Great! You can now sign in or create another account</label>
+<div class="w3-container w3-center" th:if="${session.admin==null}">
+    <div class="w3-bar w3-padding-large w3-padding-24">
+        <button class="w3-btn w3-green w3-round-large w3-margin-bottom" onclick="location.href='/admin/login.html'">Sign in</button>
+    </div>
+</div>
+<div th:if="${session.admin!=null}">
+    <div th:replace="fragments/main :: loggedAdminPage"></div>
+</div>
+</body>
+</html>

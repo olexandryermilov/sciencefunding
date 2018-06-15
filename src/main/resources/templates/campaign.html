@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <title>Sciencefunding</title>
+</head>
+<body>
+<div th:replace="fragments/top :: header"></div>
+<div class="w3-container w3-center">
+    <div class="w3-bar w3-padding-large w3-padding-24">
+        <div class="w3-container w3-green w3-opacity ">
+            <h1><span th:text="${session.campaign.name}"></span></h1>
+            <p><span th:text="${session.campaign.description}"/></p>
+            <p><span th:text="@{${session.moneyRaised}+'/'+${session.campaign.needToRaise}}"/></p>
+            <p><span th:text="${session.campaign.organiser}" /> </p>
+            <div>
+                <div th:if="${session.campaign.isActive==1}" action="" method="get">
+                    <button class="w3-btn w3-green w3-round-large w3-margin-bottom"
+                            th:onclick="'window.location.href = \'' + @{/donate/{id}(id=${campaign.id})} + '\''" >Donate</button>
+
+                </div>
+            </div>
+        </div>
+        <p class="w3-text-red"><span th:value="${session.errorMessage}" /></p>
+
+        <div th:replace="fragments/backtomain :: backtomain">
+        </div>
+        <br/><br/>
+        <!--{users}></!-->
+    </div>
+</div>
+</body>
+</html>
+

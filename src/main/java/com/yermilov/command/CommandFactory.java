@@ -8,7 +8,7 @@ import java.util.Map;
 public class CommandFactory {
     private final static CommandFactory factory = new CommandFactory();
     public final static String LOGIN = "login";
-    public final static String REGISTRATION = "registration";
+    public final static String REGISTRATION = "registration.html";
     public final static String LOGOUT = "logout";
     public final static String USERS = "users";
     public final static String ADMIN_LOGIN="adminLogin";
@@ -21,6 +21,7 @@ public class CommandFactory {
     public final static String WATCH_CAMPAIGN = "campaign";
     public final static String DONATE = "donate";
     public final static String DONATIONS = "donations";
+    public final static String USERS_DONATIONS = "usersDonations";
     private Map<String,Command> commandMap = new HashMap<>();
     private CommandFactory(){
         commandMap.put(LOGIN,new com.yermilov.command.LoginCommand());
@@ -37,6 +38,7 @@ public class CommandFactory {
         commandMap.put(WATCH_CAMPAIGN,new WatchCampaignCommand());
         commandMap.put(DONATE,new DonateCommand());
         commandMap.put(DONATIONS,new DonationsCommand());
+        commandMap.put(USERS_DONATIONS, new UsersDonationsCommand());
     }
     public static CommandFactory getInstance() {
         return factory;
@@ -44,10 +46,6 @@ public class CommandFactory {
 
     public Command getCommand(String command){
         return commandMap.get(command);
-    }
-
-    public Map<String, Command> getCommandMap() {
-        return commandMap;
     }
 
 }

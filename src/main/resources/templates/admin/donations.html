@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <title>Sciencefunding</title>
+</head>
+<body>
+<div th:replace="fragments/top :: header"></div>
+<div class="w3-container w3-center">
+    <div class="w3-bar w3-padding-large w3-padding-24">
+        <form method="post" action="" >
+            <input type="text" name="text" class="w3-input w3-animate-input w3-border w3-round-large" />
+            <input type="hidden" name="command" value="search" />
+            <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Search</button>
+        </form>
+        <table class="w3-table-all w3-light-green">
+            <tr>
+                <td>Id</td>
+                <td>From user</td>
+                <td>To campaign</td>
+                <td>Value</td>
+                <td>Comment</td>
+            </tr>
+            
+            <th:block th:each="donation : ${donations}"><tr>
+                <td th:text="${donation.id}"> </td>
+                <td th:text="${donation.fromUser.email}"></td>
+                <td th:text="${donation.toCampaign.name}"></td>
+                <td th:text="${donation.value}"> </td>
+                <td th:text="${donation.comment}"></td>
+            </tr></th:block>
+        </table>
+        <div th:if="${pageNumber>1}"><a th:href="${pageNumber-1}">Previous page</a></div>
+        <div th:if="${pageAmount>pageNumber}"><a th:href="${pageNumber+1}">Next page</a></div>
+        <a class="w3-text-red" th:value="${errorMessage}"></a>
+        <div class="w3-container w3-opacity w3-right-align w3-padding">
+            <button class="w3-btn w3-green w3-round-large w3-border" onclick="location.href='/admin'">Back to main</button>
+        </div>
+        <br/><br/>
+        <!--{users}></!-->
+    </div>
+</div>
+</body>
+</html>
+

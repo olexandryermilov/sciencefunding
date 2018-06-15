@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="loggedUserPage">
+    Hi, <label th:text="${session.currentUser.name}" > </label>
+        <br/>
+        <button class="w3-btn w3-green w3-round-large w3-margin-bottom" onclick="location.href='addCampaign'">Add campaign</button>
+    <button class="w3-btn w3-green w3-round-large w3-margin-bottom" onclick="location.href='campaigns/1'" >Watch campaigns</button>
+    <button class="w3-btn w3-green w3-round-large w3-margin-bottom" onclick="location.href='myDonations/1'" >Watch donations</button>
+    <form name="logoutForm" method="get" action="/logout" class="w3-right-align">
+                <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-top">Log out</button>
+        </form>
+</div>
+</body>
+</html>

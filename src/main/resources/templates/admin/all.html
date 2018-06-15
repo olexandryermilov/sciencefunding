@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <title>Sciencefunding</title>
+</head>
+<body>
+<div th:replace="fragments/top :: header"></div>
+<div class="w3-container w3-center">
+    <div class="w3-bar w3-padding-large w3-padding-24">
+        <table class="w3-table-all w3-light-green">
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Surname</td>
+                <td>Email</td>
+                <td>Is active</td>
+                <td>Change state</td>
+                <td>Register as scientist</td>
+            </tr>
+
+            <th:block th:each="user : ${users}">
+                <tr>
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.surname}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.isActive}"></td>
+                    <td><form action="a" method="post">
+                        <input type="hidden" name="command" value="delete" />
+                        <input type="hidden" name="userid" value="5" /><!--th:value="${user.id}"-->
+                        <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Change state</button>
+                    </form></td>
+                    <td>
+                        <form action="a" method="post">
+                            <input type="hidden" name="command" value="addScientist"/>
+                            <input type="hidden" name="userid" value="${user.id}" />
+                            <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Register as scientist</button>
+                        </form>
+                    </td>
+                </tr></th:block>
+        </table>
+        <!--<div th:if="${param.pageNumber>1}"><a th:href="@{'/admin/users/'+${param.page-1}}">Previous page</a></div>
+        <div th:if="${pageAmount>param.pageNumber}"><a th:href="@{'/admin/users/'+${param.page-1}}">Next page</a></div>
+        --><!--<label class="w3-text-red" th:value="${errorMessage}"></label>-->
+    </div>
+    <!--{users}></!-->
+</div>
+</body>
+</html>
+

@@ -1,6 +1,6 @@
 package com.yermilov.service;
 
-import com.yermilov.dao.CampaignDAO;
+import com.yermilov.dao.ormlite.CampaignDAOORMLite;
 import com.yermilov.dao.DAOFactory;
 import com.yermilov.dao.IDAOFactory;
 import com.yermilov.domain.*;
@@ -24,7 +24,7 @@ public class AddCampaignService {
     }
 
     public void addCampaign(User user, int needToRaise, String name, int domainId, String description) throws DAOException{
-        CampaignDAO campaignDAO = daoFactory.getCampaignDAO();
+        CampaignDAOORMLite campaignDAO = daoFactory.getCampaignDAO();
         campaignDAO.create( user,needToRaise, name, domainId, description);
     }
 }

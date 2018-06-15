@@ -1,5 +1,8 @@
 package com.yermilov.dao;
 
+import com.yermilov.dao.ormlite.AdminDAOORMLite;
+import com.yermilov.dao.ormlite.CampaignDAOORMLite;
+import com.yermilov.dao.springdata.AdminDAOSpringData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,17 +18,17 @@ public class DAOFactory implements IDAOFactory {
     private AdminDAO adminDAO;
     private UserDAO userDAO;
     private ScientistDAO scientistDAO;
-    private CampaignDAO campaignDAO;
+    private CampaignDAOORMLite campaignDAO;
     private OrganiserDAO organiserDAO;
     private OrganisationDAO organisationDAO;
     private DomainDAO domainDAO;
     private DonationDAO donationDAO;
     public DAOFactory(){
         try{
-            adminDAO = new AdminDAO();
+            adminDAO = new AdminDAOORMLite();
             userDAO = new UserDAO();
             scientistDAO = new ScientistDAO();
-            campaignDAO=new CampaignDAO();
+            campaignDAO=new CampaignDAOORMLite();
             organiserDAO =new OrganiserDAO();
             organisationDAO = new OrganisationDAO();
             domainDAO=new DomainDAO();
@@ -56,7 +59,7 @@ public class DAOFactory implements IDAOFactory {
     }
 
     @Override
-    public CampaignDAO getCampaignDAO() {
+    public CampaignDAOORMLite getCampaignDAO() {
         return campaignDAO;
     }
 
@@ -99,7 +102,7 @@ public class DAOFactory implements IDAOFactory {
         this.userDAO = userDAO;
     }
 
-    public void setCampaignDAO(CampaignDAO campaignDAO) {
+    public void setCampaignDAO(CampaignDAOORMLite campaignDAO) {
         this.campaignDAO = campaignDAO;
     }
 

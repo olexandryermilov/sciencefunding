@@ -10,10 +10,11 @@ import java.io.IOException;
 
 public class LogoutCommand implements Command{
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("admin");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        //request.getRequestDispatcher("index.jsp").forward(request, response);
+        return "/admin/index";
     }
     @Override
     public String toString(){

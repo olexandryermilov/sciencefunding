@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="header.jsp"/>
-<c:if test="${not empty justRegistered}">
-    <label class="w3-text">Great! You can now sign in or create another account</label>
-    <c:remove var="justRegistered"/>
-</c:if>
 <div class="w3-card-4">
     <div class="w3-container ">
         <form name="loginForm" method="POST" action="controller">

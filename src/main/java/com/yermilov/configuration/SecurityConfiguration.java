@@ -28,8 +28,8 @@ public class SecurityConfiguration {
         grant.put(CommandFactory.WATCH_CAMPAIGN,AUTH);
         grant.put(CommandFactory.DONATE,AUTH);
         grant.put("/",ALL);
-        grant.put("registration.jsp",ALL);
-        grant.put("login.jsp",ALL);
+        grant.put("registration.html",ALL);
+        grant.put("login.html",ALL);
         grant.put("index.jsp",ALL);
         grant.put("admin",ALL);
         grant.put("users.jsp",ADMIN);

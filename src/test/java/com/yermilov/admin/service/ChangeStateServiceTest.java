@@ -1,6 +1,6 @@
 package com.yermilov.admin.service;
-import com.j256.ormlite.stmt.query.In;
-import com.yermilov.dao.CampaignDAO;
+import com.yermilov.admin.service.dao.ChangeStateService;
+import com.yermilov.dao.ormlite.CampaignDAOORMLite;
 import com.yermilov.dao.DAOFactory;
 import com.yermilov.dao.UserDAO;
 import com.yermilov.domain.*;
@@ -47,7 +47,7 @@ public class ChangeStateServiceTest {
         List<Organiser> organiserList = TableCreator.initOrganiserTable();
         List<Campaign> campaignList = TableCreator.initCampaignTable();
         ChangeStateService changeStateService = ChangeStateService.getChangeStateService();
-        CampaignDAO campaignDAO = DAOFactory.getInstance().getCampaignDAO();
+        CampaignDAOORMLite campaignDAO = DAOFactory.getInstance().getCampaignDAO();
         for(Campaign campaign : campaignList){
             int state = campaign.getIsActive();
             changeStateService.changeCampaignState(campaign.getId());

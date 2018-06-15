@@ -8,7 +8,7 @@ import java.util.Map;
 public class CommandFactory {
     private final static CommandFactory factory = new CommandFactory();
     public final static String LOGIN = "login";
-    public final static String REGISTRATION = "registration";
+    public final static String REGISTRATION = "registration.html";
     public final static String LOGOUT = "logout";
     public final static String USERS = "users";
     public final static String ADMIN_LOGIN="adminLogin";

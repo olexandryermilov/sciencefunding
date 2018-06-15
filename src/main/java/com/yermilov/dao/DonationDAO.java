@@ -10,7 +10,9 @@ import com.yermilov.transaction.DatabaseConnector;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
 
 /**
  * Wrapper for dao provided by ORMLite
@@ -27,6 +29,29 @@ public class DonationDAO {
     public int create(Donation donation) throws DAOException {
         try {
             return donationDao.create(donation);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
+    public List<Donation> getDonationsLike(String text,User user) throws DAOException {
+        try {
+            List<Donation>donations = donationDao.queryForAll();
+            donations.forEach(donation->{
+                try {
+                    DAOFactory.getInstance().getCampaignDAO().getCampaignDao().refresh(donation.getToCampaign());
+                } catch (SQLException e) {
+
+                }
+                try {
+                    DAOFactory.getInstance().getUserDAO().getUserDao().refresh(donation.getFromUser());
+                } catch (SQLException e) {
+
+                }
+            });
+                    return donations.stream().filter(donation -> (donation.getComment().toLowerCase().contains(text)
+                    ||donation.getFromUser().getEmail().toLowerCase().contains(text)
+                    ||donation.getToCampaign().getName().toLowerCase().contains(text)
+                    ||String.valueOf(donation.getValue()).contains(text))&&(user==null|| user.getId().equals(donation.getFromUser().getId()))).collect(Collectors.toList());
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());
         }
@@ -91,10 +116,12 @@ public class DonationDAO {
             PreparedQuery<Donation> preparedQuery =queryBuilder.limit((long) limit).offset((long) (skip)).
                     where().eq("from_user_id",userId).prepare();
             List<Donation> donations =donationDao.query(preparedQuery);
+            System.out.println(donations.size());
             donations.forEach(donation -> {
                 try {
                     DAOFactory.getInstance().getUserDAO().getUserDao().refresh(donation.getFromUser());
                     DAOFactory.getInstance().getCampaignDAO().getCampaignDao().refresh(donation.getToCampaign());
+                    System.out.println(donation);
                 } catch (SQLException ignored) {
                 }
             });

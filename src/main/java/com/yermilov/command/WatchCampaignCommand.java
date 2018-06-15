@@ -16,7 +16,7 @@ import java.io.IOException;
 public class WatchCampaignCommand implements Command {
     private final static Logger LOGGER = LoggerFactory.getLogger(WatchCampaignCommand.class);
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id  = Integer.parseInt(request.getParameter("campaignId"));
 
         CampaignService campaignService = CampaignService.getCampaignService();
@@ -25,9 +25,11 @@ public class WatchCampaignCommand implements Command {
             int moneyRaised = campaignService.getRaisedMoneyForCampaign(id);
             request.setAttribute("campaign",campaign);
             request.setAttribute("moneyRaised",moneyRaised);
-            request.getRequestDispatcher("campaign.jsp").forward(request, response);
+            //request.getRequestDispatcher("campaign.jsp").forward(request, response);
+            return "campaign";
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());
+            return "error";
         }
     }
     @Override

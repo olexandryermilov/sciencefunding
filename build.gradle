@@ -6,15 +6,17 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'com.bmuschko:gradle-tomcat-plugin:2.4.2'
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
 
+
 apply plugin: 'java'
+apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: "jacoco"
-apply plugin: 'com.bmuschko.tomcat'
 apply plugin: 'groovy'
+apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
 jacoco {
@@ -35,16 +37,25 @@ jacocoTestReport {
 }
 
 dependencies {
-	compile 'org.slf4j:slf4j-api:1.7.25'
-	compile 'org.slf4j:slf4j-log4j12:1.7.25'
-	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	//compile 'org.springframework.security:spring-security-web:5.0.6.RELEASE'
+	//compile 'org.springframework.security:spring-security-config:5.0.6.RELEASE'
+	//compile("org.springframework.boot:spring-boot-devtools")
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	//compile 'org.springframework:spring-webmvc:5.0.3.RELEASE'
+	//compile 'org.slf4j:slf4j-api:1.7.25'
+	//compile 'org.slf4j:slf4j-log4j12:1.7.25'
+	//compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	compile ('org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final')
 	testCompile group: 'junit', name: 'junit', version: '4.12'
 	testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
 	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.12.0'
 	testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
 	compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1.1'
 	compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.4.2'
-	compile 'org.slf4j:slf4j-nop:1.7.25'
+	//compile 'org.slf4j:slf4j-nop:1.7.25'
 	compile 'org.apache.taglibs:taglibs-standard-spec:1.2.5'
 	compile 'org.apache.taglibs:taglibs-standard-impl:1.2.5'
 	compile 'mysql:mysql-connector-java:6.0.6'
@@ -57,13 +68,4 @@ dependencies {
 	testCompile( 'com.athaydes:spock-reports:1.4.0' ) {
 		transitive = false
 	}
-	def tomcatVersion = '9.0.1'
-	tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-			"org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6",
-			"org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
-}
-
-tomcat {
-	httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
-	ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
 }

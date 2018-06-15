@@ -1,6 +1,6 @@
 package com.yermilov.admin.command;
 
-import com.yermilov.admin.service.DonationService;
+import com.yermilov.admin.service.dao.DonationService;
 import com.yermilov.command.Command;
 import com.yermilov.domain.Donation;
 import com.yermilov.exception.DAOException;
@@ -16,7 +16,7 @@ import java.util.List;
 public class DonationsCommand implements Command {
     private final static Logger LOGGER = LoggerFactory.getLogger(DonationsCommand.class);
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DonationService donationService = DonationService.getDonationService();
         try{
             String pageNumberParam = req.getParameter("pageNumber");
@@ -30,14 +30,18 @@ public class DonationsCommand implements Command {
             List<Donation> donations = donationService.getDonations((pageNum-1)*pageSize,pageSize);
             req.setAttribute("pageAmount",((donationService.getTableSize()+pageSize-1)/pageSize));
             req.setAttribute("donations",donations);
-            req.getRequestDispatcher("donations.jsp").forward(req,resp);
+            //req.getRequestDispatcher("donations.jsp").forward(req,resp);
+            return "donations";
         }
         catch(NumberFormatException e){
             LOGGER.error(e.getMessage());
             req.setAttribute("errorMessage","Page number and page size must be a positive integer number.");
-            req.getRequestDispatcher("donations.jsp").forward(req,resp);
+            //req.getRequestDispatcher("donations.jsp").forward(req,resp);
+            return "donations";
+
         } catch (DAOException e) {
             LOGGER.error(e.getMessage());
+            return "error";
         }
     }
     @Override

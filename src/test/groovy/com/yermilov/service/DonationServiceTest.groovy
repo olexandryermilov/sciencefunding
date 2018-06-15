@@ -1,6 +1,6 @@
 package com.yermilov.service
 
-import com.yermilov.admin.service.DonationService
+import com.yermilov.admin.service.dao.DonationService
 import com.yermilov.dao.DAOFactory
 import com.yermilov.domain.*
 import com.yermilov.tableworkers.TableCleaner

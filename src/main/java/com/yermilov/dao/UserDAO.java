@@ -9,6 +9,8 @@ import com.yermilov.transaction.DatabaseConnector;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Wrapper for dao provided by ORMLite
@@ -53,6 +55,17 @@ public class UserDAO {
             QueryBuilder<User,Long> queryBuilder = userDao.queryBuilder();
             PreparedQuery<User> preparedQuery =queryBuilder.limit((long) limit).offset((long) (skip)).prepare();
             return userDao.query(preparedQuery);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
+
+    public List<User> getUsersLike(String text) throws DAOException {
+        try {
+            return  userDao.queryForAll().stream().filter(user -> (user.getName().toLowerCase().contains(text)
+                    ||user.getEmail().toLowerCase().contains(text)
+                    ||user.getSurname().toLowerCase().contains(text)
+                    ||user.getId().toString().contains(text))).collect(Collectors.toList());
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());
         }

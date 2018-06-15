@@ -1,6 +1,7 @@
 package com.yermilov.admin.service;
 
-import com.yermilov.dao.AdminDAO;
+import com.yermilov.admin.service.dao.LoginService;
+import com.yermilov.dao.ormlite.AdminDAOORMLite;
 import com.yermilov.dao.DAOFactory;
 import com.yermilov.dao.IDAOFactory;
 import com.yermilov.domain.Admin;
@@ -30,7 +31,7 @@ public class LoginServiceTest {
         final String TEST_EMAIL="abs@gmail.com",TEST_PASSWORD="qweerty";
         final Admin RIGHT_ANSWER = new Admin(TEST_EMAIL,TEST_PASSWORD);
         IDAOFactory daoFactory = mock(IDAOFactory.class);
-        AdminDAO adminDAO = mock(AdminDAO.class);
+        AdminDAOORMLite adminDAO = mock(AdminDAOORMLite.class);
         when(adminDAO.queryForEmail(TEST_EMAIL)).thenReturn(RIGHT_ANSWER);
         when(daoFactory.getAdminDAO()).thenReturn(adminDAO);
         LoginService loginService = LoginService.getLoginService();
@@ -43,7 +44,7 @@ public class LoginServiceTest {
         final String TEST_EMAIL="abs@gmail.com",TEST_PASSWORD="qweerty";
         final Admin RIGHT_ANSWER = new Admin(TEST_EMAIL,TEST_PASSWORD);
         IDAOFactory daoFactory = mock(IDAOFactory.class);
-        AdminDAO adminDAO = mock(AdminDAO.class);
+        AdminDAOORMLite adminDAO = mock(AdminDAOORMLite.class);
         when(adminDAO.queryForEmail(TEST_EMAIL)).thenReturn(RIGHT_ANSWER);
         when(daoFactory.getAdminDAO()).thenReturn(adminDAO);
         LoginService loginService = LoginService.getLoginService();

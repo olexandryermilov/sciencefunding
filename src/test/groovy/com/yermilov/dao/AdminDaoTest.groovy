@@ -5,9 +5,11 @@ import com.yermilov.tableworkers.TableCleaner
 import com.yermilov.tableworkers.TableCreator
 import com.yermilov.transaction.DatabaseConnector
 import com.yermilov.transaction.H2ConnectionPool
+import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Shared
 import spock.lang.Specification
 
+@SpringBootTest
 class AdminDaoTest extends Specification {
 
     @Shared
